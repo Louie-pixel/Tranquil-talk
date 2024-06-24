@@ -3,7 +3,9 @@ import React from 'react';
 const Dashboard = () => {
   return (
     <div>
-      {/* Dashboard content */}
+      <h2>Dashboard</h2>
+      <p>Welcome to your dashboard!</p>
+      {/* Add more dashboard content as needed */}
     </div>
   );
 }
