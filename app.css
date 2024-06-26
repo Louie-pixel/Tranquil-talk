@@ -36,11 +36,11 @@ img {
 
 /* Specific class for smaller images */
 .small-img {
-  max-width: 150px;
+  max-width: 100px;
   height: auto;
 }
 
 .medium-img {
-  max-width: 300px;
+  max-width: 200px;
   height: auto;
 }
