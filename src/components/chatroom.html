@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Room</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .chat-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .chat-messages {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .chat-input {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-right: 10px;
+        }
+
+        .send-button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .send-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h2>Chat Room</h2>
+        <div class="chat-messages" id="chatMessages">
+            <!-- Messages will be dynamically added here -->
+        </div>
+        <div>
+            <input type="text" id="newMessage" class="chat-input" placeholder="Type your message..." />
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulated messages array
+        let messages = [];
+
+        function sendMessage() {
+            // Retrieve new message text
+            let newMessage = document.getElementById('newMessage').value;
+
+            if (newMessage.trim() === '') {
+                alert('Please enter a message.');
+                return;
+            }
+
+            // Add new message to the messages array
+            messages.push(newMessage);
+
+            // Clear input field
+            document.getElementById('newMessage').value = '';
+
+            // Display messages
+            displayMessages();
+        }
+
+        function displayMessages() {
+            let chatMessagesElement = document.getElementById('chatMessages');
+            chatMessagesElement.innerHTML = '';
+
+            messages.forEach((message, index) => {
+                let messageDiv = document.createElement('div');
+                messageDiv.textContent = message;
+                chatMessagesElement.appendChild(messageDiv);
+            });
+        }
+
+        // Initially display any existing messages
+        displayMessages();
+    </script>
+</body>
+</html>

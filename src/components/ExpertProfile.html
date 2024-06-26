@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expert Profile</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .profile-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .profile-container label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .profile-container input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        .profile-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .profile-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-container">
+        <h2>Expert Profile</h2>
+        <div>
+            <label for="field">Field:</label>
+            <input type="text" id="field" value="Psychiatry" disabled>
+        </div>
+        <div>
+            <label for="experience">Experience:</label>
+            <input type="number" id="experience" value="10" disabled>
+        </div>
+        <div>
+            <label for="clinics">Clinics:</label>
+            <input type="text" id="clinics" value="Clinic A, Clinic B" disabled>
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="expert@example.com" disabled>
+        </div>
+        <div>
+            <label for="phone">Phone Number:</label>
+            <input type="tel" id="phone" value="+1234567890" disabled>
+        </div>
+        <button disabled>Update Profile</button>
+    </div>
+</body>
+</html>

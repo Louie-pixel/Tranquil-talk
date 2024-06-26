@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Tranquil Talk</title>
+    <style>
+        /* Add your CSS styles here */
+        form {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .forgot-password {
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        .user-type {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="handleLogin(event)">
+            <label>
+                Username:
+                <input type="text" id="username" required>
+            </label>
+            <br>
+            <label>
+                Password:
+                <input type="password" id="password" required>
+            </label>
+            <br>
+            <div class="user-type">
+                <input type="radio" id="user" name="userType" value="user" checked>
+                <label for="user">User</label>
+                <input type="radio" id="expert" name="userType" value="expert">
+                <label for="expert">Expert</label>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div class="forgot-password">
+            <a href="forgot_password.html">Forgot Password?</a>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const userType = document.querySelector('input[name="userType"]:checked').value;
+            
+            // Implement login logic based on userType
+            if (userType === 'user') {
+                console.log('Logging in as User with:', username, password);
+                // Optionally, make an AJAX request to authenticate the user as a regular user
+            } else if (userType === 'expert') {
+                console.log('Logging in as Expert with:', username, password);
+                // Optionally, make an AJAX request to authenticate the user as an expert
+            }
+        }
+    </script>
+</body>
+</html>
