@@ -3,78 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tranquil Talk App</title>
+  <title>Tranquil Talk Components</title>
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
   <header>
-    <!-- Include your Header component -->
-    <h1>Tranquil Talk</h1>
+    <h1>Tranquil Talk Components</h1>
     <nav>
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#chatroom">Chat Room</a></li>
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#login">Login</a></li>
-        <li><a href="#register">Register</a></li>
+        <li><button onclick="showComponent('home')">Home</button></li>
+        <li><button onclick="showComponent('login')">Login</button></li>
+        <li><button onclick="showComponent('register')">Register</button></li>
+        <li><button onclick="showComponent('dashboard')">Dashboard</button></li>
+        <li><button onclick="showComponent('chatroom')">Chat Room</button></li>
+        <li><button onclick="showComponent('profile')">Profile</button></li>
+        <li><button onclick="showComponent('expertprofile')">Expert Profile</button></li>
+        <li><button onclick="showComponent('userprofile')">User Profile</button></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <section id="home">
-      <!-- Include Home content or component -->
-      <h2>Home</h2>
-      <p>Welcome to Tranquil Talk App!</p>
-    </section>
-
-    <section id="dashboard">
-      <!-- Include Dashboard component -->
-      <h2>Dashboard</h2>
-      <div id="dashboard-content">
-        <!-- Dashboard component content -->
-      </div>
-    </section>
-
-    <section id="chatroom">
-      <!-- Include Chat Room component -->
-      <h2>Chat Room</h2>
-      <div id="chatroom-content">
-        <!-- Chat Room component content -->
-      </div>
-    </section>
-
-    <section id="profile">
-      <!-- Include Profile components (User Profile and Expert Profile) -->
-      <h2>Profiles</h2>
-      <div id="user-profile">
-        <!-- User Profile component content -->
-      </div>
-      <div id="expert-profile">
-        <!-- Expert Profile component content -->
-      </div>
-    </section>
-
-    <section id="login">
-      <!-- Include Login component -->
-      <h2>Login</h2>
-      <div id="login-content">
-        <!-- Login component content -->
-      </div>
-    </section>
-
-    <section id="register">
-      <!-- Include Register component -->
-      <h2>Register</h2>
-      <div id="register-content">
-        <!-- Register component content -->
-      </div>
-    </section>
+  <main id="main-content">
+    <!-- Components will be loaded here -->
   </main>
 
   <footer>
-    <!-- Include Footer component -->
     <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
   </footer>
 
