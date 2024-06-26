@@ -1,29 +1,19 @@
-// Function to switch components and manage visibility
+let isLoggedIn = false; // Track login state
+
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  const navigation = document.getElementById('navigation');
-  
-  // Hide login and register buttons after logging in
-  if (componentName === 'dashboard' || componentName === 'profile' || componentName === 'chatroom' || componentName === 'userprofile' || componentName === 'expertprofile') {
-    navigation.innerHTML = `
-      <ul>
-        <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
-        <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-        <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
-        <li><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
-        <li><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
-      </ul>`;
-  } else {
-    navigation.innerHTML = `
-      <ul>
-        <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li><a href="#" onclick="showComponent('register')">Register</a></li>
-      </ul>`;
-  }
-
   mainContent.innerHTML = ''; // Clear previous content
+
+  // Hide login and register buttons if logged in
+  const loginButton = document.getElementById('login');
+  const registerButton = document.getElementById('register');
+  if (isLoggedIn) {
+    loginButton.classList.add('hide');
+    registerButton.classList.add('hide');
+  } else {
+    loginButton.classList.remove('hide');
+    registerButton.classList.remove('hide');
+  }
 
   // Load component based on componentName
   switch (componentName) {
@@ -50,7 +40,11 @@ function showComponent(componentName) {
           <br />
           <button type="submit">Login</button>
         </form>
-        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>`;
+        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>
+        <p>Login as: 
+          <button onclick="showComponent('userLogin')">User</button>
+          <button onclick="showComponent('expertLogin')">Expert</button>
+        </p>`;
       break;
     case 'register':
       mainContent.innerHTML = `
@@ -147,6 +141,9 @@ function showComponent(componentName) {
         <h2>Component Not Found</h2>
         <p>The requested component does not exist.</p>`;
   }
+
+  // Change background color of main content
+  mainContent.style.backgroundColor = '#ddd'; // Light grey background
 }
 
 function handleLogin(event) {
@@ -155,11 +152,10 @@ function handleLogin(event) {
   const password = document.getElementById('login-password').value;
   console.log('Logging in with:', username, password);
   
-  // Simulate successful login
-  // For demonstration purposes, let's assume login is successful after validation
-  // You can replace this with your actual login logic
+  // Simulate successful login (toggle isLoggedIn)
+  isLoggedIn = true;
   
-  // Example: After successful login, show the dashboard
+  // Show the dashboard after successful login
   showComponent('dashboard');
 }
 
@@ -169,13 +165,7 @@ function handleRegister(event) {
   const email = document.getElementById('register-email').value;
   const password = document.getElementById('register-password').value;
   console.log('Registering with:', username, email, password);
-  
-  // Simulate successful registration
-  // For demonstration purposes, assume registration is successful
-  // You can replace this with your actual registration logic
-  
-  // Example: After successful registration, show the dashboard
-  showComponent('dashboard');
+  // Implement registration logic here
 }
 
 function sendMessage() {
@@ -203,8 +193,3 @@ function updateExpertProfile() {
   console.log('Updating expert profile with:', field, experience, clinics, email, number);
   // Implement expert profile update logic here
 }
-
-// Initial setup: Show the home component by default
-document.addEventListener('DOMContentLoaded', function () {
-  showComponent('home');
-});
