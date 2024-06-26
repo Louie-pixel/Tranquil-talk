@@ -12,22 +12,23 @@
     <nav>
       <ul>
         <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li id="login"><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li id="register"><a href="#" onclick="showComponent('register')">Register</a></li>
         <li><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
         <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
         <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
         <li><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
         <li><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
+        <!-- Conditional rendering based on login state -->
+        <li id="login-btn" style="display: ${isLoggedIn ? 'none' : 'block'}"><a href="#" onclick="showComponent('login')">Login</a></li>
+        <li id="register-btn" style="display: ${isLoggedIn ? 'none' : 'block'}"><a href="#" onclick="showComponent('register')">Register</a></li>
+        <li id="logout-btn" style="display: ${isLoggedIn ? 'block' : 'none'}"><a href="#" onclick="logout()">Logout</a></li>
       </ul>
     </nav>
   </header>
   <main id="main-content">
-    <h2>Welcome to Tranquil Talk</h2>
-    <p>This is the home page content.</p>
+    <!-- Content dynamically loaded here -->
   </main>
   <footer>
-    <p>Footer content goes here.</p>
+    <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
   </footer>
 </body>
 </html>
