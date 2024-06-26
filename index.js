@@ -7,11 +7,13 @@ function showComponent(componentName) {
     case 'home':
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
+        <img src="images/logo.png" alt="Logo" />
         <p>This is the home page content.</p>`;
       break;
     case 'login':
       mainContent.innerHTML = `
         <h2>Login</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" />
         <form onsubmit="handleLogin(event)">
           <label>
             Username:
@@ -56,11 +58,13 @@ function showComponent(componentName) {
     case 'dashboard':
       mainContent.innerHTML = `
         <h2>Dashboard</h2>
+        <img src="images/dashboard.png" alt="Dashboard" />
         <p>Welcome to your dashboard!</p>`;
       break;
     case 'chatroom':
       mainContent.innerHTML = `
         <h2>Chat Room</h2>
+        <img src="images/chat-background.jpg" alt="Chat Background" />
         <div id="chat-messages"></div>
         <input type="text" id="new-message" />
         <button onclick="sendMessage()">Send</button>`;
@@ -68,6 +72,7 @@ function showComponent(componentName) {
     case 'profile':
       mainContent.innerHTML = `
         <h2>User Profile</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="profile-preferences" />
@@ -81,6 +86,7 @@ function showComponent(componentName) {
     case 'expertprofile':
       mainContent.innerHTML = `
         <h2>Expert Profile</h2>
+        <img src="images/expert-avatar.png" alt="Expert Avatar" />
         <div>
           <label>Field:</label>
           <input type="text" id="expert-field" />
@@ -106,6 +112,7 @@ function showComponent(componentName) {
     case 'userprofile':
       mainContent.innerHTML = `
         <h2>User Profile</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="user-preferences" />
