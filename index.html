@@ -6,19 +6,52 @@
   <title>Tranquil Talk</title>
   <link rel="stylesheet" href="app.css">
   <script src="index.js" defer></script>
+  <style>
+    /* Basic styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header nav ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    header nav ul li {
+      display: inline;
+      margin-right: 10px;
+    }
+    main {
+      padding: 20px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      background-color: #f1f1f1;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    /* Specific styling for tabs */
+    .tab {
+      display: none; /* Hide all tabs initially */
+    }
+  </style>
 </head>
 <body>
   <header>
     <nav>
       <ul>
         <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li><a href="#" onclick="showComponent('register')">Register</a></li>
-        <li id="dashboard-tab" class="hidden"><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
-        <li id="chatroom-tab" class="hidden"><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-        <li id="profile-tab" class="hidden"><a href="#" onclick="showComponent('profile')">Profile</a></li>
-        <li id="expertprofile-tab" class="hidden"><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
-        <li id="userprofile-tab" class="hidden"><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
+        <!-- Login tab -->
+        <li id="loginTab"><a href="#" onclick="handleLogin()">Login</a></li>
+        <!-- Register tab -->
+        <li id="registerTab"><a href="#" onclick="handleRegister()">Register</a></li>
+        <li><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
+        <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
+        <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
+        <li><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
+        <li><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
       </ul>
     </nav>
   </header>
@@ -26,5 +59,8 @@
     <h2>Welcome to Tranquil Talk</h2>
     <p>This is the home page content.</p>
   </main>
+  <footer>
+    <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
+  </footer>
 </body>
 </html>
