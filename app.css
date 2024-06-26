@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f1f1f1; /* Default background color */
+  background-color: #f0f0f0; /* Default background color for all pages */
 }
 
 header nav ul {
@@ -18,13 +18,13 @@ header nav ul li {
 
 main {
   padding: 20px;
-  background-color: #fff; /* Component background color */
+  background-color: #ffffff; /* Background color for main content */
 }
 
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: #f1f1f1; /* Background color for footer */
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -47,7 +47,7 @@ img {
   height: auto;
 }
 
-/* Hide login and register buttons */
-.hide {
+/* Hide login and register buttons when logged in */
+.logged-in #login, .logged-in #register {
   display: none;
 }
