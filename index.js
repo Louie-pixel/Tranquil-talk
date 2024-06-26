@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const http = require('http');
 const socketIo = require('socket.io');
+const path = require('path'); // Import path module
 
 const app = express();
 const server = http.createServer(app);
@@ -12,6 +13,9 @@ const io = socketIo(server);
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/tranquil-talk', {
