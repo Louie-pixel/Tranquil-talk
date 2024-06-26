@@ -1,40 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+function showComponent(componentName) {
+  const mainContent = document.getElementById('main-content');
+  mainContent.innerHTML = ''; // Clear previous content
 
-import './app.css'; // Assuming you have styles defined in app.css
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Home from './components/Home';
-import Dashboard from './components/Dashboard';
-import ChatRoom from './components/ChatRoom';
-import Profile from './components/Profile';
-import Login from './components/Login';
-import Register from './components/Register';
-import ExpertProfile from './components/ExpertProfile';
-import UserProfile from './components/UserProfile';
-import Navbar from './components/Navbar';
-
-const App = () => {
-  return (
-    <Router>
-      <div>
-        <Header />
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/chatroom" component={ChatRoom} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/expertprofile" component={ExpertProfile} />
-          <Route path="/userprofile" component={UserProfile} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
+  // Load component based on componentName
+  switch (componentName) {
+    case 'home':
+      mainContent.innerHTML = '<h2>Welcome to Tranquil Talk</h2><p>This is the home page content.</p>';
+      break;
+    case 'login':
+      mainContent.innerHTML = '<h2>Login</h2><p>Login form will be here.</p>';
+      break;
+    case 'register':
+      mainContent.innerHTML = '<h2>Register</h2><p>Registration form will be here.</p>';
+      break;
+    case 'dashboard':
+      mainContent.innerHTML = '<h2>Dashboard</h2><p>Dashboard content will be here.</p>';
+      break;
+    case 'chatroom':
+      mainContent.innerHTML = '<h2>Chat Room</h2><p>Chat room interface will be here.</p>';
+      break;
+    case 'profile':
+      mainContent.innerHTML = '<h2>Profile</h2><p>User profile details will be here.</p>';
+      break;
+    case 'expertprofile':
+      mainContent.innerHTML = '<h2>Expert Profile</h2><p>Expert profile details will be here.</p>';
+      break;
+    case 'userprofile':
+      mainContent.innerHTML = '<h2>User Profile</h2><p>User profile details will be here.</p>';
+      break;
+    default:
+      mainContent.innerHTML = '<h2>Component Not Found</h2><p>The requested component does not exist.</p>';
+  }
 }
-
-ReactDOM.render(<App />, document.getElementById('root'));
