@@ -1,19 +1,63 @@
-// Function to show or hide components based on user actions
+// Function to initialize the app
+function initApp() {
+  // Initially show the login component
+  showComponent('login');
+}
+
+// Function to switch between components and manage login state
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  
-  // Hide login and register tabs
-  const loginTab = document.getElementById('loginTab');
-  const registerTab = document.getElementById('registerTab');
-  loginTab.style.display = 'none';
-  registerTab.style.display = 'none';
+  const loginNav = document.getElementById('login-nav');
+  const loggedInNav = document.getElementById('logged-in-nav');
 
-  // Show main content based on componentName
+  mainContent.innerHTML = ''; // Clear previous content
+
+  // Load component based on componentName
   switch (componentName) {
     case 'home':
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
         <p>This is the home page content.</p>`;
+      break;
+    case 'login':
+      mainContent.innerHTML = `
+        <h2>Login</h2>
+        <form onsubmit="handleLogin(event)">
+          <label>
+            Username:
+            <input type="text" id="login-username" />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" id="login-password" />
+          </label>
+          <br />
+          <button type="submit">Login</button>
+        </form>
+        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>`;
+      break;
+    case 'register':
+      mainContent.innerHTML = `
+        <h2>Register</h2>
+        <form onsubmit="handleRegister(event)">
+          <label>
+            Username:
+            <input type="text" id="register-username" />
+          </label>
+          <br />
+          <label>
+            Email:
+            <input type="email" id="register-email" />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" id="register-password" />
+          </label>
+          <br />
+          <button type="submit">Register</button>
+        </form>`;
       break;
     case 'dashboard':
       mainContent.innerHTML = `
@@ -83,47 +127,68 @@ function showComponent(componentName) {
         <h2>Component Not Found</h2>
         <p>The requested component does not exist.</p>`;
   }
+
+  // Toggle visibility of navigation based on login state
+  if (isLoggedIn()) {
+    loginNav.style.display = 'none';
+    loggedInNav.style.display = 'block';
+  } else {
+    loginNav.style.display = 'block';
+    loggedInNav.style.display = 'none';
+  }
 }
 
-// Function to handle login
-function handleLogin() {
-  // Implement your login logic here
-  // For demonstration purposes, simply showing the dashboard after "logging in"
+// Simulated login function (replace with actual login logic)
+function handleLogin(event) {
+  event.preventDefault();
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+  console.log('Logging in with:', username, password);
+
+  // Simulate successful login for demonstration
+  // Replace with actual login logic that sets the logged-in state
+  setLoggedIn(true);
+
+  // Load dashboard after login
   showComponent('dashboard');
 }
 
-// Function to handle registration
-function handleRegister() {
-  // Implement your registration logic here
-  // For demonstration purposes, simply showing the profile page after "registering"
-  showComponent('profile');
+// Simulated registration function (replace with actual registration logic)
+function handleRegister(event) {
+  event.preventDefault();
+  const username = document.getElementById('register-username').value;
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
+  console.log('Registering with:', username, email, password);
+
+  // Simulate successful registration for demonstration
+  // Replace with actual registration logic that may also log the user in
+  setLoggedIn(true);
+
+  // Load dashboard after registration
+  showComponent('dashboard');
 }
 
-// Function to send a message (for chat room example)
-function sendMessage() {
-  const newMessage = document.getElementById('new-message').value;
-  const chatMessages = document.getElementById('chat-messages');
-  chatMessages.innerHTML += `<div>${newMessage}</div>`;
-  document.getElementById('new-message').value = '';
-  console.log('Sending message:', newMessage);
-  // Implement send message logic here
+// Simulated logout function (replace with actual logout logic)
+function logout() {
+  // Simulate logout by clearing logged-in state
+  setLoggedIn(false);
+
+  // Show login page after logout
+  showComponent('login');
 }
 
-// Function to update user profile
-function updateUserProfile() {
-  const preferences = document.getElementById('profile-preferences').value;
-  const mentalHealthNeeds = document.getElementById('profile-mental-health-needs').value;
-  console.log('Updating user profile with:', preferences, mentalHealthNeeds);
-  // Implement user profile update logic here
+// Function to check if user is logged in (replace with actual logic)
+function isLoggedIn() {
+  // Simulated check for demonstration
+  return localStorage.getItem('loggedIn') === 'true';
 }
 
-// Function to update expert profile
-function updateExpertProfile() {
-  const field = document.getElementById('expert-field').value;
-  const experience = document.getElementById('expert-experience').value;
-  const clinics = document.getElementById('expert-clinics').value;
-  const email = document.getElementById('expert-email').value;
-  const number = document.getElementById('expert-number').value;
-  console.log('Updating expert profile with:', field, experience, clinics, email, number);
-  // Implement expert profile update logic here
+// Function to set logged-in state (replace with actual logic)
+function setLoggedIn(value) {
+  // Simulated setting of logged-in state
+  localStorage.setItem('loggedIn', value ? 'true' : 'false');
 }
+
+// Initialize the app on page load
+document.addEventListener('DOMContentLoaded', initApp);
