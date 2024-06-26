@@ -1,39 +1,20 @@
-// Function to switch components and manage visibility
+let isLoggedIn = false;
+
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  const navigation = document.getElementById('navigation');
-  
-  // Hide login and register buttons after logging in
-  if (componentName === 'dashboard' || componentName === 'profile' || componentName === 'chatroom' || componentName === 'userprofile' || componentName === 'expertprofile') {
-    navigation.innerHTML = `
-      <ul>
-        <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
-        <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-        <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
-        <li><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
-        <li><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
-      </ul>`;
-  } else {
-    navigation.innerHTML = `
-      <ul>
-        <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li><a href="#" onclick="showComponent('register')">Register</a></li>
-      </ul>`;
-  }
-
   mainContent.innerHTML = ''; // Clear previous content
 
   // Load component based on componentName
   switch (componentName) {
     case 'home':
+      mainContent.className = 'component-home';
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
         <img src="images/logo.png" alt="Logo" class="small-img" />
         <p>This is the home page content.</p>`;
       break;
     case 'login':
+      mainContent.className = 'component-login';
       mainContent.innerHTML = `
         <h2>Login</h2>
         <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
@@ -50,9 +31,14 @@ function showComponent(componentName) {
           <br />
           <button type="submit">Login</button>
         </form>
-        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>`;
+        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>
+        <p>Login as: 
+          <button onclick="showComponent('userLogin')">User</button>
+          <button onclick="showComponent('expertLogin')">Expert</button>
+        </p>`;
       break;
     case 'register':
+      mainContent.className = 'component-register';
       mainContent.innerHTML = `
         <h2>Register</h2>
         <form onsubmit="handleRegister(event)">
@@ -75,12 +61,14 @@ function showComponent(componentName) {
         </form>`;
       break;
     case 'dashboard':
+      mainContent.className = 'component-dashboard';
       mainContent.innerHTML = `
         <h2>Dashboard</h2>
         <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
         <p>Welcome to your dashboard!</p>`;
       break;
     case 'chatroom':
+      mainContent.className = 'component-chatroom';
       mainContent.innerHTML = `
         <h2>Chat Room</h2>
         <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
@@ -89,6 +77,7 @@ function showComponent(componentName) {
         <button onclick="sendMessage()">Send</button>`;
       break;
     case 'profile':
+      mainContent.className = 'component-profile';
       mainContent.innerHTML = `
         <h2>User Profile</h2>
         <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
@@ -103,6 +92,7 @@ function showComponent(componentName) {
         <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
     case 'expertprofile':
+      mainContent.className = 'component-expertprofile';
       mainContent.innerHTML = `
         <h2>Expert Profile</h2>
         <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
@@ -129,6 +119,7 @@ function showComponent(componentName) {
         <button onclick="updateExpertProfile()">Update Profile</button>`;
       break;
     case 'userprofile':
+      mainContent.className = 'component-userprofile';
       mainContent.innerHTML = `
         <h2>User Profile</h2>
         <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
@@ -143,9 +134,23 @@ function showComponent(componentName) {
         <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
     default:
+      mainContent.className = ''; // Reset class
       mainContent.innerHTML = `
         <h2>Component Not Found</h2>
         <p>The requested component does not exist.</p>`;
+  }
+
+  // Change background and hide buttons if logged in
+  if (isLoggedIn) {
+    document.body.style.backgroundColor = '#d3d3d3'; // Grey background
+    document.querySelectorAll('header nav ul li.login, header nav ul li.register').forEach(button => {
+      button.style.display = 'none';
+    });
+  } else {
+    document.body.style.backgroundColor = '#f0f0f0'; // Default background
+    document.querySelectorAll('header nav ul li.login, header nav ul li.register').forEach(button => {
+      button.style.display = 'inline';
+    });
   }
 }
 
@@ -154,13 +159,12 @@ function handleLogin(event) {
   const username = document.getElementById('login-username').value;
   const password = document.getElementById('login-password').value;
   console.log('Logging in with:', username, password);
-  
-  // Simulate successful login
-  // For demonstration purposes, let's assume login is successful after validation
-  // You can replace this with your actual login logic
-  
-  // Example: After successful login, show the dashboard
-  showComponent('dashboard');
+
+  // Simulate successful login (replace with actual login logic)
+  isLoggedIn = true;
+
+  // Show home page after login
+  showComponent('home');
 }
 
 function handleRegister(event) {
@@ -169,13 +173,7 @@ function handleRegister(event) {
   const email = document.getElementById('register-email').value;
   const password = document.getElementById('register-password').value;
   console.log('Registering with:', username, email, password);
-  
-  // Simulate successful registration
-  // For demonstration purposes, assume registration is successful
-  // You can replace this with your actual registration logic
-  
-  // Example: After successful registration, show the dashboard
-  showComponent('dashboard');
+  // Implement registration logic here
 }
 
 function sendMessage() {
@@ -204,7 +202,5 @@ function updateExpertProfile() {
   // Implement expert profile update logic here
 }
 
-// Initial setup: Show the home component by default
-document.addEventListener('DOMContentLoaded', function () {
-  showComponent('home');
-});
+// Initially show login page
+showComponent('login');
