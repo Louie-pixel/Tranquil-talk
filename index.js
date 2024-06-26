@@ -1,19 +1,6 @@
-let isLoggedIn = false; // Track login state
-
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
   mainContent.innerHTML = ''; // Clear previous content
-
-  // Hide login and register buttons if logged in
-  const loginButton = document.getElementById('login');
-  const registerButton = document.getElementById('register');
-  if (isLoggedIn) {
-    loginButton.classList.add('hide');
-    registerButton.classList.add('hide');
-  } else {
-    loginButton.classList.remove('hide');
-    registerButton.classList.remove('hide');
-  }
 
   // Load component based on componentName
   switch (componentName) {
@@ -142,8 +129,13 @@ function showComponent(componentName) {
         <p>The requested component does not exist.</p>`;
   }
 
-  // Change background color of main content
-  mainContent.style.backgroundColor = '#ddd'; // Light grey background
+  // After rendering content, check if logged in to hide login/register buttons
+  const isLoggedIn = checkLoginStatus(); // Implement this function to check login status
+  if (isLoggedIn) {
+    document.body.classList.add('logged-in');
+  } else {
+    document.body.classList.remove('logged-in');
+  }
 }
 
 function handleLogin(event) {
@@ -151,12 +143,9 @@ function handleLogin(event) {
   const username = document.getElementById('login-username').value;
   const password = document.getElementById('login-password').value;
   console.log('Logging in with:', username, password);
-  
-  // Simulate successful login (toggle isLoggedIn)
-  isLoggedIn = true;
-  
-  // Show the dashboard after successful login
-  showComponent('dashboard');
+  // Implement login logic here
+  // For demo purposes, assuming login is successful:
+  document.body.classList.add('logged-in');
 }
 
 function handleRegister(event) {
@@ -166,6 +155,8 @@ function handleRegister(event) {
   const password = document.getElementById('register-password').value;
   console.log('Registering with:', username, email, password);
   // Implement registration logic here
+  // For demo purposes, assuming registration is successful:
+  document.body.classList.add('logged-in');
 }
 
 function sendMessage() {
@@ -192,4 +183,10 @@ function updateExpertProfile() {
   const number = document.getElementById('expert-number').value;
   console.log('Updating expert profile with:', field, experience, clinics, email, number);
   // Implement expert profile update logic here
+}
+
+function checkLoginStatus() {
+  // Implement function to check if user is logged in (true/false)
+  // For demo purposes, returning true if a user is considered logged in.
+  return true;
 }
