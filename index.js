@@ -58,13 +58,13 @@ function showComponent(componentName) {
     case 'dashboard':
       mainContent.innerHTML = `
         <h2>Dashboard</h2>
-        <img src="images/dashboard.png" alt="Dashboard" class="small-img" />
+        <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
         <p>Welcome to your dashboard!</p>`;
       break;
     case 'chatroom':
       mainContent.innerHTML = `
         <h2>Chat Room</h2>
-        <img src="images/chat-background.jpg" alt="Chat Background" class="small-img" />
+        <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
         <div id="chat-messages"></div>
         <input type="text" id="new-message" />
         <button onclick="sendMessage()">Send</button>`;
