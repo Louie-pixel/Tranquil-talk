@@ -9,16 +9,19 @@
 </head>
 <body>
   <header>
-    <nav id="navigation">
+    <nav>
       <ul>
         <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li><a href="#" onclick="showComponent('register')">Register</a></li>
+        <li class="login"><a href="#" onclick="showComponent('login')">Login</a></li>
+        <li class="register"><a href="#" onclick="showComponent('register')">Register</a></li>
       </ul>
     </nav>
   </header>
-  <main id="main-content">
-    <!-- Content dynamically loaded here -->
+  <main id="main-content" class="component-login">
+    <!-- Content loaded dynamically -->
   </main>
+  <footer>
+    <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
+  </footer>
 </body>
 </html>
