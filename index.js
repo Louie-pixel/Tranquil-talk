@@ -135,7 +135,14 @@ function handleLogin(event) {
   const username = document.getElementById('login-username').value;
   const password = document.getElementById('login-password').value;
   console.log('Logging in with:', username, password);
-  // Implement login logic here
+
+  // Simulate successful login
+  if (username && password) {
+    showTabsAfterLogin();
+    showComponent('dashboard'); // Redirect to dashboard after login
+  } else {
+    alert('Please enter both username and password.');
+  }
 }
 
 function handleRegister(event) {
@@ -171,4 +178,12 @@ function updateExpertProfile() {
   const number = document.getElementById('expert-number').value;
   console.log('Updating expert profile with:', field, experience, clinics, email, number);
   // Implement expert profile update logic here
+}
+
+function showTabsAfterLogin() {
+  document.getElementById('dashboard-tab').classList.remove('hidden');
+  document.getElementById('chatroom-tab').classList.remove('hidden');
+  document.getElementById('profile-tab').classList.remove('hidden');
+  document.getElementById('expertprofile-tab').classList.remove('hidden');
+  document.getElementById('userprofile-tab').classList.remove('hidden');
 }
