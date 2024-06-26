@@ -52,3 +52,44 @@ img {
 .logged-in header nav ul li.register {
   display: none;
 }
+
+/* Background images for components */
+.component-home {
+  background-image: url('images/background-home.jpg');
+  background-size: cover;
+}
+
+.component-login {
+  background-image: url('images/background-login.jpg');
+  background-size: cover;
+}
+
+.component-register {
+  background-image: url('images/background-register.jpg');
+  background-size: cover;
+}
+
+.component-dashboard {
+  background-image: url('images/background-dashboard.jpg');
+  background-size: cover;
+}
+
+.component-chatroom {
+  background-image: url('images/background-chatroom.jpg');
+  background-size: cover;
+}
+
+.component-profile {
+  background-image: url('images/background-profile.jpg');
+  background-size: cover;
+}
+
+.component-expertprofile {
+  background-image: url('images/background-expertprofile.jpg');
+  background-size: cover;
+}
+
+.component-userprofile {
+  background-image: url('images/background-userprofile.jpg');
+  background-size: cover;
+}
