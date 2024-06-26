@@ -1,3 +1,5 @@
+let isLoggedIn = false; // Initial login state
+
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
   mainContent.innerHTML = ''; // Clear previous content
@@ -7,134 +9,156 @@ function showComponent(componentName) {
     case 'home':
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
-        <img src="images/logo.png" alt="Logo" class="small-img" />
+        <img src="images/logo.png" alt="Logo" class="medium-img" />
         <p>This is the home page content.</p>`;
       break;
     case 'login':
-      mainContent.innerHTML = `
-        <h2>Login</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
-        <form onsubmit="handleLogin(event)">
-          <label>
-            Username:
-            <input type="text" id="login-username" />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" id="login-password" />
-          </label>
-          <br />
-          <button type="submit">Login</button>
-        </form>
-        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>
-        <p>Login as: 
-          <button onclick="showComponent('userLogin')">User</button>
-          <button onclick="showComponent('expertLogin')">Expert</button>
-        </p>`;
+      if (!isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>Login</h2>
+          <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+          <form onsubmit="handleLogin(event)">
+            <label>
+              Username:
+              <input type="text" id="login-username" />
+            </label>
+            <br />
+            <label>
+              Password:
+              <input type="password" id="login-password" />
+            </label>
+            <br />
+            <button type="submit">Login</button>
+          </form>
+          <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>
+          <p>Login as: 
+            <button onclick="showComponent('userLogin')">User</button>
+            <button onclick="showComponent('expertLogin')">Expert</button>
+          </p>`;
+      } else {
+        // Redirect to home or dashboard if already logged in
+        showComponent('home');
+      }
       break;
     case 'register':
-      mainContent.innerHTML = `
-        <h2>Register</h2>
-        <form onsubmit="handleRegister(event)">
-          <label>
-            Username:
-            <input type="text" id="register-username" />
-          </label>
-          <br />
-          <label>
-            Email:
-            <input type="email" id="register-email" />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" id="register-password" />
-          </label>
-          <br />
-          <button type="submit">Register</button>
-        </form>`;
+      if (!isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>Register</h2>
+          <form onsubmit="handleRegister(event)">
+            <label>
+              Username:
+              <input type="text" id="register-username" />
+            </label>
+            <br />
+            <label>
+              Email:
+              <input type="email" id="register-email" />
+            </label>
+            <br />
+            <label>
+              Password:
+              <input type="password" id="register-password" />
+            </label>
+            <br />
+            <button type="submit">Register</button>
+          </form>`;
+      } else {
+        // Redirect to home or dashboard if already logged in
+        showComponent('home');
+      }
       break;
     case 'dashboard':
-      mainContent.innerHTML = `
-        <h2>Dashboard</h2>
-        <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
-        <p>Welcome to your dashboard!</p>`;
+      if (isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>Dashboard</h2>
+          <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
+          <p>Welcome to your dashboard!</p>`;
+      } else {
+        showComponent('login'); // Redirect to login if not logged in
+      }
       break;
     case 'chatroom':
-      mainContent.innerHTML = `
-        <h2>Chat Room</h2>
-        <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
-        <div id="chat-messages"></div>
-        <input type="text" id="new-message" />
-        <button onclick="sendMessage()">Send</button>`;
+      if (isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>Chat Room</h2>
+          <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
+          <div id="chat-messages"></div>
+          <input type="text" id="new-message" />
+          <button onclick="sendMessage()">Send</button>`;
+      } else {
+        showComponent('login'); // Redirect to login if not logged in
+      }
       break;
     case 'profile':
-      mainContent.innerHTML = `
-        <h2>User Profile</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
-        <div>
-          <label>Preferences:</label>
-          <input type="text" id="profile-preferences" />
-        </div>
-        <div>
-          <label>Mental Health Needs:</label>
-          <textarea id="profile-mental-health-needs"></textarea>
-        </div>
-        <button onclick="updateUserProfile()">Update Profile</button>`;
+      if (isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>User Profile</h2>
+          <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+          <div>
+            <label>Preferences:</label>
+            <input type="text" id="profile-preferences" />
+          </div>
+          <div>
+            <label>Mental Health Needs:</label>
+            <textarea id="profile-mental-health-needs"></textarea>
+          </div>
+          <button onclick="updateUserProfile()">Update Profile</button>`;
+      } else {
+        showComponent('login'); // Redirect to login if not logged in
+      }
       break;
     case 'expertprofile':
-      mainContent.innerHTML = `
-        <h2>Expert Profile</h2>
-        <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
-        <div>
-          <label>Field:</label>
-          <input type="text" id="expert-field" />
-        </div>
-        <div>
-          <label>Experience:</label>
-          <input type="number" id="expert-experience" />
-        </div>
-        <div>
-          <label>Clinics:</label>
-          <input type="text" id="expert-clinics" />
-        </div>
-        <div>
-          <label>Email:</label>
-          <input type="email" id="expert-email" />
-        </div>
-        <div>
-          <label>Number:</label>
-          <input type="tel" id="expert-number" />
-        </div>
-        <button onclick="updateExpertProfile()">Update Profile</button>`;
+      if (isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>Expert Profile</h2>
+          <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
+          <div>
+            <label>Field:</label>
+            <input type="text" id="expert-field" />
+          </div>
+          <div>
+            <label>Experience:</label>
+            <input type="number" id="expert-experience" />
+          </div>
+          <div>
+            <label>Clinics:</label>
+            <input type="text" id="expert-clinics" />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input type="email" id="expert-email" />
+          </div>
+          <div>
+            <label>Number:</label>
+            <input type="tel" id="expert-number" />
+          </div>
+          <button onclick="updateExpertProfile()">Update Profile</button>`;
+      } else {
+        showComponent('login'); // Redirect to login if not logged in
+      }
       break;
     case 'userprofile':
-      mainContent.innerHTML = `
-        <h2>User Profile</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
-        <div>
-          <label>Preferences:</label>
-          <input type="text" id="user-preferences" />
-        </div>
-        <div>
-          <label>Mental Health Needs:</label>
-          <textarea id="user-mental-health-needs"></textarea>
-        </div>
-        <button onclick="updateUserProfile()">Update Profile</button>`;
+      if (isLoggedIn) {
+        mainContent.innerHTML = `
+          <h2>User Profile</h2>
+          <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+          <div>
+            <label>Preferences:</label>
+            <input type="text" id="user-preferences" />
+          </div>
+          <div>
+            <label>Mental Health Needs:</label>
+            <textarea id="user-mental-health-needs"></textarea>
+          </div>
+          <button onclick="updateUserProfile()">Update Profile</button>`;
+      } else {
+        showComponent('login'); // Redirect to login if not logged in
+      }
       break;
     default:
       mainContent.innerHTML = `
         <h2>Component Not Found</h2>
         <p>The requested component does not exist.</p>`;
-  }
-
-  // After rendering content, check if logged in to hide login/register buttons
-  const isLoggedIn = checkLoginStatus(); // Implement this function to check login status
-  if (isLoggedIn) {
-    document.body.classList.add('logged-in');
-  } else {
-    document.body.classList.remove('logged-in');
   }
 }
 
@@ -142,10 +166,14 @@ function handleLogin(event) {
   event.preventDefault();
   const username = document.getElementById('login-username').value;
   const password = document.getElementById('login-password').value;
-  console.log('Logging in with:', username, password);
-  // Implement login logic here
-  // For demo purposes, assuming login is successful:
-  document.body.classList.add('logged-in');
+  
+  // Simulate a login (replace with actual login logic)
+  if (username === 'user' && password === 'password') {
+    isLoggedIn = true;
+    showComponent('home'); // Redirect to home after successful login
+  } else {
+    alert('Invalid username or password');
+  }
 }
 
 function handleRegister(event) {
@@ -153,10 +181,10 @@ function handleRegister(event) {
   const username = document.getElementById('register-username').value;
   const email = document.getElementById('register-email').value;
   const password = document.getElementById('register-password').value;
-  console.log('Registering with:', username, email, password);
-  // Implement registration logic here
-  // For demo purposes, assuming registration is successful:
-  document.body.classList.add('logged-in');
+  
+  // Simulate a registration (replace with actual registration logic)
+  alert(`Registered with: ${username}, ${email}, ${password}`);
+  showComponent('login'); // Redirect to login after successful registration
 }
 
 function sendMessage() {
@@ -185,8 +213,5 @@ function updateExpertProfile() {
   // Implement expert profile update logic here
 }
 
-function checkLoginStatus() {
-  // Implement function to check if user is logged in (true/false)
-  // For demo purposes, returning true if a user is considered logged in.
-  return true;
-}
+// Initial page load: Show the home page
+showComponent('home');
