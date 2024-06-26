@@ -1,70 +1,28 @@
+// Function to show or hide components based on user actions
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  mainContent.innerHTML = ''; // Clear previous content
+  
+  // Hide login and register tabs
+  const loginTab = document.getElementById('loginTab');
+  const registerTab = document.getElementById('registerTab');
+  loginTab.style.display = 'none';
+  registerTab.style.display = 'none';
 
-  // Load component based on componentName
+  // Show main content based on componentName
   switch (componentName) {
     case 'home':
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
-        <img src="images/logo.png" alt="Logo" class="small-img" />
         <p>This is the home page content.</p>`;
-      break;
-    case 'login':
-      mainContent.innerHTML = `
-        <h2>Login</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
-        <form onsubmit="handleLogin(event)">
-          <label>
-            Username:
-            <input type="text" id="login-username" />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" id="login-password" />
-          </label>
-          <br />
-          <button type="submit">Login</button>
-        </form>
-        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>
-        <p>Login as: 
-          <button onclick="showComponent('userLogin')">User</button>
-          <button onclick="showComponent('expertLogin')">Expert</button>
-        </p>`;
-      break;
-    case 'register':
-      mainContent.innerHTML = `
-        <h2>Register</h2>
-        <form onsubmit="handleRegister(event)">
-          <label>
-            Username:
-            <input type="text" id="register-username" />
-          </label>
-          <br />
-          <label>
-            Email:
-            <input type="email" id="register-email" />
-          </label>
-          <br />
-          <label>
-            Password:
-            <input type="password" id="register-password" />
-          </label>
-          <br />
-          <button type="submit">Register</button>
-        </form>`;
       break;
     case 'dashboard':
       mainContent.innerHTML = `
         <h2>Dashboard</h2>
-        <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
         <p>Welcome to your dashboard!</p>`;
       break;
     case 'chatroom':
       mainContent.innerHTML = `
         <h2>Chat Room</h2>
-        <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
         <div id="chat-messages"></div>
         <input type="text" id="new-message" />
         <button onclick="sendMessage()">Send</button>`;
@@ -72,7 +30,6 @@ function showComponent(componentName) {
     case 'profile':
       mainContent.innerHTML = `
         <h2>User Profile</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="profile-preferences" />
@@ -86,7 +43,6 @@ function showComponent(componentName) {
     case 'expertprofile':
       mainContent.innerHTML = `
         <h2>Expert Profile</h2>
-        <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
         <div>
           <label>Field:</label>
           <input type="text" id="expert-field" />
@@ -112,7 +68,6 @@ function showComponent(componentName) {
     case 'userprofile':
       mainContent.innerHTML = `
         <h2>User Profile</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="user-preferences" />
@@ -130,30 +85,21 @@ function showComponent(componentName) {
   }
 }
 
-function handleLogin(event) {
-  event.preventDefault();
-  const username = document.getElementById('login-username').value;
-  const password = document.getElementById('login-password').value;
-  console.log('Logging in with:', username, password);
-
-  // Simulate successful login
-  if (username && password) {
-    showTabsAfterLogin();
-    showComponent('dashboard'); // Redirect to dashboard after login
-  } else {
-    alert('Please enter both username and password.');
-  }
+// Function to handle login
+function handleLogin() {
+  // Implement your login logic here
+  // For demonstration purposes, simply showing the dashboard after "logging in"
+  showComponent('dashboard');
 }
 
-function handleRegister(event) {
-  event.preventDefault();
-  const username = document.getElementById('register-username').value;
-  const email = document.getElementById('register-email').value;
-  const password = document.getElementById('register-password').value;
-  console.log('Registering with:', username, email, password);
-  // Implement registration logic here
+// Function to handle registration
+function handleRegister() {
+  // Implement your registration logic here
+  // For demonstration purposes, simply showing the profile page after "registering"
+  showComponent('profile');
 }
 
+// Function to send a message (for chat room example)
 function sendMessage() {
   const newMessage = document.getElementById('new-message').value;
   const chatMessages = document.getElementById('chat-messages');
@@ -163,6 +109,7 @@ function sendMessage() {
   // Implement send message logic here
 }
 
+// Function to update user profile
 function updateUserProfile() {
   const preferences = document.getElementById('profile-preferences').value;
   const mentalHealthNeeds = document.getElementById('profile-mental-health-needs').value;
@@ -170,6 +117,7 @@ function updateUserProfile() {
   // Implement user profile update logic here
 }
 
+// Function to update expert profile
 function updateExpertProfile() {
   const field = document.getElementById('expert-field').value;
   const experience = document.getElementById('expert-experience').value;
@@ -178,12 +126,4 @@ function updateExpertProfile() {
   const number = document.getElementById('expert-number').value;
   console.log('Updating expert profile with:', field, experience, clinics, email, number);
   // Implement expert profile update logic here
-}
-
-function showTabsAfterLogin() {
-  document.getElementById('dashboard-tab').classList.remove('hidden');
-  document.getElementById('chatroom-tab').classList.remove('hidden');
-  document.getElementById('profile-tab').classList.remove('hidden');
-  document.getElementById('expertprofile-tab').classList.remove('hidden');
-  document.getElementById('userprofile-tab').classList.remove('hidden');
 }
