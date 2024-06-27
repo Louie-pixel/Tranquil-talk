@@ -161,6 +161,49 @@ function showComponent(componentName) {
         </div>
         <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
+    case 'forgotPassword':
+      mainContent.innerHTML = `
+        <h2>Forgot Password</h2>
+        <p>Enter your email to reset your password.</p>
+        <input type="email" id="forgot-email" />
+        <button onclick="resetPassword()">Reset Password</button>`;
+      break;
+    case 'userLogin':
+      // Logic for user-specific login
+      mainContent.innerHTML = `
+        <h2>User Login</h2>
+        <form onsubmit="handleUserLogin(event)">
+          <label>
+            Username:
+            <input type="text" id="user-login-username" />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" id="user-login-password" />
+          </label>
+          <br />
+          <button type="submit">Login</button>
+        </form>`;
+      break;
+    case 'expertLogin':
+      // Logic for expert-specific login
+      mainContent.innerHTML = `
+        <h2>Expert Login</h2>
+        <form onsubmit="handleExpertLogin(event)">
+          <label>
+            Username:
+            <input type="text" id="expert-login-username" />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" id="expert-login-password" />
+          </label>
+          <br />
+          <button type="submit">Login</button>
+        </form>`;
+      break;
     default:
       mainContent.innerHTML = `
         <h2>Component Not Found</h2>
@@ -182,6 +225,18 @@ function handleRegister(event) {
   showComponent('dashboard');
 }
 
+function handleUserLogin(event) {
+  event.preventDefault();
+  isLoggedIn = true;
+  showComponent('dashboard');
+}
+
+function handleExpertLogin(event) {
+  event.preventDefault();
+  isLoggedIn = true;
+  showComponent('dashboard');
+}
+
 function logout() {
   isLoggedIn = false;
   showComponent('login');
@@ -197,11 +252,30 @@ function updateExpertProfile() {
   console.log('Updating expert profile');
 }
 
+function resetPassword() {
+  // Reset password logic
+  console.log('Resetting password');
+}
+
 function updateNavigation() {
   const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
-  loginItems.forEach(item => {
-    item.style.display = isLoggedIn ? 'none' : 'inline';
-  });
+  const loggedInItems = document.querySelectorAll('header nav ul li:not(.login):not(.register)');
+  
+  if (isLoggedIn) {
+    loginItems.forEach(item => {
+      item.style.display = 'none';
+    });
+    loggedInItems.forEach(item => {
+      item.style.display = 'inline';
+    });
+  } else {
+    loginItems.forEach(item => {
+      item.style.display = 'inline';
+    });
+    loggedInItems.forEach(item => {
+      item.style.display = 'none';
+    });
+  }
 }
 
 // Initially show login page
