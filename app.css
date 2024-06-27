@@ -1,129 +1,80 @@
-/* General styles */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: black; /* Set background color to black */
-  color: black; /* Set text color to black */
+  background-color: #f0f0f0; /* Light grey background for entire page */
 }
 
 header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
+  background-color: #333; /* Dark grey header background */
+  color: #fff; /* White text color for header */
+  padding: 10px;
 }
 
 header nav ul {
   list-style-type: none;
-  padding: 0;
   margin: 0;
-  display: flex;
-  justify-content: center;
+  padding: 0;
 }
 
 header nav ul li {
   display: inline;
-  margin: 0 10px;
+  margin-right: 10px;
 }
 
 header nav ul li a {
-  color: white;
+  color: #fff; /* White text color for links */
   text-decoration: none;
+  padding: 5px 10px;
 }
 
 header nav ul li a:hover {
-  text-decoration: underline;
+  background-color: #555; /* Darker grey on hover */
 }
 
 main {
   padding: 20px;
-  min-height: 80vh; /* Ensures footer is at the bottom */
 }
 
 footer {
+  background-color: #333; /* Dark grey footer background */
+  color: #fff; /* White text color for footer */
   text-align: center;
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.small-img {
-  max-width: 100px;
-  height: auto;
-}
-
-.medium-img {
-  max-width: 200px;
-  height: auto;
-}
-
-.logged-in header nav ul li.login,
-.logged-in header nav ul li.register {
-  display: none;
-}
-
-.component-home, .component-login, .component-register, .component-dashboard, .component-chatroom, .component-profile, .component-expertprofile, .component-userprofile {
-  background-size: cover;
-  padding: 20px;
-  color: black; /* Set text color to black */
-}
-
-.component-home {
-  background-image: url('images/background-home.jpg');
 }
 
 .component-login {
-  background-image: url('images/background-login.jpg');
+  background-color: #fff; /* White background for login component */
 }
 
 .component-register {
-  background-image: url('images/background-register.jpg');
+  background-color: #fff; /* White background for register component */
 }
 
 .component-dashboard {
-  background-image: url('images/background-dashboard.jpg');
+  background-color: #fff; /* White background for dashboard component */
 }
 
 .component-chatroom {
-  background-image: url('images/background-chatroom.jpg');
+  background-color: #fff; /* White background for chatroom component */
 }
 
 .component-profile {
-  background-image: url('images/background-profile.jpg');
+  background-color: #fff; /* White background for profile component */
 }
 
 .component-expertprofile {
-  background-image: url('images/background-expertprofile.jpg');
+  background-color: #fff; /* White background for expert profile component */
 }
 
 .component-userprofile {
-  background-image: url('images/background-userprofile.jpg');
+  background-color: #fff; /* White background for user profile component */
 }
 
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.small-img {
+  max-width: 100px; /* Adjust image size as needed */
 }
 
-.dashboard-item {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 15px;
-  margin: 10px;
-  width: 80%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.dashboard-item h3 {
-  margin-top: 0;
+.medium-img {
+  max-width: 300px; /* Adjust image size as needed */
 }
