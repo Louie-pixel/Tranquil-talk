@@ -4,7 +4,9 @@ body {
   background-color: #f0f0f0; /* Light grey background */
   margin: 0;
   padding: 0;
-  color: black; /* Set text color to black */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure footer is at the bottom */
 }
 
 header {
@@ -39,6 +41,8 @@ header nav ul li a:hover {
 main {
   flex: 1; /* Take remaining vertical space */
   padding: 20px;
+  color: black; /* Set text color to black */
+  background-color: transparent; /* Ensure main content area is transparent */
 }
 
 footer {
@@ -60,17 +64,8 @@ footer {
 .component-expertprofile,
 .component-userprofile,
 .component-home {
-  background-color: white; /* White background for components */
+  background-color: grey; /* Change background color to grey for components */
   padding: 20px;
   margin: 10px;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for visual appeal */
-}
-
-.small-img {
-  max-width: 100px; /* Adjust max-width for small images */
-}
-
-.medium-img {
-  max-width: 300px; /* Adjust max-width for medium-sized images */
 }
