@@ -2,25 +2,21 @@ let isLoggedIn = false;
 
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  const navList = document.querySelector('header nav ul');
+  mainContent.innerHTML = ''; // Clear previous content
 
-  // Clear previous content
-  mainContent.innerHTML = '';
-
-  // Load component based on componentName
   switch (componentName) {
     case 'home':
       mainContent.className = 'component-home';
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
-        <img src="images/home.jpg" alt="Home Image" class="page-image" />
+        <img src="images/logo.png" alt="Logo" class="small-img" />
         <p>This is the home page content.</p>`;
       break;
     case 'login':
       mainContent.className = 'component-login';
       mainContent.innerHTML = `
         <h2>Login</h2>
-        <img src="images/login.jpg" alt="Login Image" class="page-image" />
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
         <form onsubmit="handleLogin(event)">
           <label>
             Username:
@@ -44,7 +40,6 @@ function showComponent(componentName) {
       mainContent.className = 'component-register';
       mainContent.innerHTML = `
         <h2>Register</h2>
-        <img src="images/register.jpg" alt="Register Image" class="page-image" />
         <form onsubmit="handleRegister(event)">
           <label>
             Username:
@@ -67,15 +62,44 @@ function showComponent(componentName) {
     case 'dashboard':
       mainContent.className = 'component-dashboard';
       mainContent.innerHTML = `
-        <h2>Dashboard</h2>
-        <img src="images/dashboard.jpg" alt="Dashboard Image" class="page-image" />
-        <p>Welcome to your dashboard!</p>`;
+        <div class="dashboard-container">
+          <h2>Dashboard</h2>
+          <div class="dashboard-item">
+            <h3>Welcome, [Username]!</h3>
+            <p>Here's a summary of your recent activity.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
+              <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
+              <li><a href="#">Settings</a></li>
+            </ul>
+          </div>
+          <div class="dashboard-item">
+            <h3>Notifications</h3>
+            <p>You have no new notifications.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Recent Activity</h3>
+            <p>No recent activity to display.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Resources</h3>
+            <p>Check out these <a href="#">helpful articles</a>.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Appointments</h3>
+            <p>No upcoming appointments.</p>
+          </div>
+          <button onclick="logout()">Logout</button>
+        </div>`;
       break;
     case 'chatroom':
       mainContent.className = 'component-chatroom';
       mainContent.innerHTML = `
         <h2>Chat Room</h2>
-        <img src="images/chatroom.jpg" alt="Chat Room Image" class="page-image" />
+        <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
         <div id="chat-messages"></div>
         <input type="text" id="new-message" />
         <button onclick="sendMessage()">Send</button>`;
@@ -84,7 +108,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-profile';
       mainContent.innerHTML = `
         <h2>User Profile</h2>
-        <img src="images/profile.jpg" alt="Profile Image" class="page-image" />
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="profile-preferences" />
@@ -99,7 +123,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-expertprofile';
       mainContent.innerHTML = `
         <h2>Expert Profile</h2>
-        <img src="images/expertprofile.jpg" alt="Expert Profile Image" class="page-image" />
+        <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
         <div>
           <label>Field:</label>
           <input type="text" id="expert-field" />
@@ -126,7 +150,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-userprofile';
       mainContent.innerHTML = `
         <h2>User Profile</h2>
-        <img src="images/userprofile.jpg" alt="User Profile Image" class="page-image" />
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="user-preferences" />
@@ -138,128 +162,46 @@ function showComponent(componentName) {
         <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
     default:
-      mainContent.className = ''; // Reset class
       mainContent.innerHTML = `
         <h2>Component Not Found</h2>
         <p>The requested component does not exist.</p>`;
   }
 
-  // Update navigation visibility based on login status
-  updateNavigationVisibility(componentName);
-}
-
-function updateNavigationVisibility(activeComponent) {
-  const navListItems = document.querySelectorAll('header nav ul li');
-
-  if (isLoggedIn) {
-    // Show all navigation items except login and register
-    navListItems.forEach(item => {
-      if (item.classList.contains('login') || item.classList.contains('register')) {
-        item.style.display = 'none';
-      } else {
-        item.style.display = 'inline';
-      }
-    });
-
-    // Display additional tabs based on active component
-    switch (activeComponent) {
-      case 'dashboard':
-        navListItems.forEach(item => {
-          if (item.classList.contains('dashboard')) {
-            item.style.display = 'none';
-          }
-        });
-        break;
-      case 'chatroom':
-        navListItems.forEach(item => {
-          if (item.classList.contains('chatroom')) {
-            item.style.display = 'none';
-          }
-        });
-        break;
-      case 'profile':
-        navListItems.forEach(item => {
-          if (item.classList.contains('profile')) {
-            item.style.display = 'none';
-          }
-        });
-        break;
-      case 'expertprofile':
-        navListItems.forEach(item => {
-          if (item.classList.contains('expertprofile')) {
-            item.style.display = 'none';
-          }
-        });
-        break;
-      case 'userprofile':
-        navListItems.forEach(item => {
-          if (item.classList.contains('userprofile')) {
-            item.style.display = 'none';
-          }
-        });
-        break;
-    }
-  } else {
-    // Show only login and register
-    navListItems.forEach(item => {
-      if (item.classList.contains('login') || item.classList.contains('register')) {
-        item.style.display = 'inline';
-      } else {
-        item.style.display = 'none';
-      }
-    });
-  }
-
-  // Set background color based on login status
-  document.body.style.backgroundColor = isLoggedIn ? '#d3d3d3' : '#f0f0f0';
+  updateNavigation();
 }
 
 function handleLogin(event) {
   event.preventDefault();
-  const username = document.getElementById('login-username').value;
-  const password = document.getElementById('login-password').value;
-  console.log('Logging in with:', username, password);
-
-  // Simulate successful login (replace with actual login logic)
   isLoggedIn = true;
-
-  // Show home page after login
-  showComponent('home');
+  showComponent('dashboard');
 }
 
 function handleRegister(event) {
   event.preventDefault();
-  const username = document.getElementById('register-username').value;
-  const email = document.getElementById('register-email').value;
-  const password = document.getElementById('register-password').value;
-  console.log('Registering with:', username, email, password);
-  // Implement registration logic here
+  isLoggedIn = true;
+  showComponent('dashboard');
 }
 
-function sendMessage() {
-  const newMessage = document.getElementById('new-message').value;
-  const chatMessages = document.getElementById('chat-messages');
-  chatMessages.innerHTML += `<div>${newMessage}</div>`;
-  document.getElementById('new-message').value = '';
-  console.log('Sending message:', newMessage);
-  // Implement send message logic here
+function logout() {
+  isLoggedIn = false;
+  showComponent('login');
 }
 
 function updateUserProfile() {
-  const preferences = document.getElementById('profile-preferences').value;
-  const mentalHealthNeeds = document.getElementById('profile-mental-health-needs').value;
-  console.log('Updating user profile with:', preferences, mentalHealthNeeds);
-  // Implement user profile update logic here
+  // Update user profile logic
+  console.log('Updating user profile');
 }
 
 function updateExpertProfile() {
-  const field = document.getElementById('expert-field').value;
-  const experience = document.getElementById('expert-experience').value;
-  const clinics = document.getElementById('expert-clinics').value;
-  const email = document.getElementById('expert-email').value;
-  const number = document.getElementById('expert-number').value;
-  console.log('Updating expert profile with:', field, experience, clinics, email, number);
-  // Implement expert profile update logic here
+  // Update expert profile logic
+  console.log('Updating expert profile');
+}
+
+function updateNavigation() {
+  const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
+  loginItems.forEach(item => {
+    item.style.display = isLoggedIn ? 'none' : 'inline';
+  });
 }
 
 // Initially show login page
