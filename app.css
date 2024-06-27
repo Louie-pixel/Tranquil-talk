@@ -3,7 +3,8 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0;
+  background-color: black;
+  color: black;
 }
 
 header {
@@ -38,6 +39,8 @@ header nav ul li a:hover {
 main {
   padding: 20px;
   min-height: 80vh; /* Ensures footer is at the bottom */
+  background-color: black;
+  color: black;
 }
 
 footer {
@@ -73,7 +76,7 @@ img {
 .component-home, .component-login, .component-register, .component-dashboard, .component-chatroom, .component-profile, .component-expertprofile, .component-userprofile {
   background-size: cover;
   padding: 20px;
-  color: white;
+  color: black;
 }
 
 .component-home {
@@ -125,4 +128,5 @@ img {
 
 .dashboard-item h3 {
   margin-top: 0;
+  color: black;
 }
