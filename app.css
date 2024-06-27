@@ -3,40 +3,58 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f0f0; /* Default background color */
+  background-color: #f0f0f0;
+}
+
+header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
 }
 
 header nav ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
 }
 
 header nav ul li {
   display: inline;
-  margin-right: 10px;
+  margin: 0 10px;
+}
+
+header nav ul li a {
+  color: white;
+  text-decoration: none;
+}
+
+header nav ul li a:hover {
+  text-decoration: underline;
 }
 
 main {
   padding: 20px;
-  background-color: #ffffff; /* White background for main content */
+  min-height: 80vh; /* Ensures footer is at the bottom */
 }
 
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: #4CAF50;
+  color: white;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
-/* Image resizing */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Specific class for smaller images */
 .small-img {
   max-width: 100px;
   height: auto;
@@ -47,49 +65,64 @@ img {
   height: auto;
 }
 
-/* Hide login/register buttons */
 .logged-in header nav ul li.login,
 .logged-in header nav ul li.register {
   display: none;
 }
 
-/* Background images for components */
+.component-home, .component-login, .component-register, .component-dashboard, .component-chatroom, .component-profile, .component-expertprofile, .component-userprofile {
+  background-size: cover;
+  padding: 20px;
+  color: white;
+}
+
 .component-home {
   background-image: url('images/background-home.jpg');
-  background-size: cover;
 }
 
 .component-login {
   background-image: url('images/background-login.jpg');
-  background-size: cover;
 }
 
 .component-register {
   background-image: url('images/background-register.jpg');
-  background-size: cover;
 }
 
 .component-dashboard {
   background-image: url('images/background-dashboard.jpg');
-  background-size: cover;
 }
 
 .component-chatroom {
   background-image: url('images/background-chatroom.jpg');
-  background-size: cover;
 }
 
 .component-profile {
   background-image: url('images/background-profile.jpg');
-  background-size: cover;
 }
 
 .component-expertprofile {
   background-image: url('images/background-expertprofile.jpg');
-  background-size: cover;
 }
 
 .component-userprofile {
   background-image: url('images/background-userprofile.jpg');
-  background-size: cover;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-item {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-item h3 {
+  margin-top: 0;
 }
