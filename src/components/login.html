@@ -56,16 +56,10 @@
     <div>
         <h2>Login</h2>
         <form id="loginForm" onsubmit="handleLogin(event)">
-            <label>
-                Username:
-                <input type="text" id="username" required>
-            </label>
-            <br>
-            <label>
-                Password:
-                <input type="password" id="password" required>
-            </label>
-            <br>
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br>
+            <label for="password">password:</label><br>
+            <input type="password" id="password" name="password" required><br>
             <div class="user-type">
                 <input type="radio" id="user" name="userType" value="user" checked>
                 <label for="user">User</label>
