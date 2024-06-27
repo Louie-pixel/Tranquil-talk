@@ -12,6 +12,7 @@ header {
   background-color: #333; /* Dark grey header */
   color: black; /* Header text color */
   padding: 10px;
+  text-align: center; /* Center align text */
 }
 
 header nav ul {
