@@ -1,9 +1,8 @@
 <?php
-// Database configuration
-$servername = "localhost"; // Change as per your MySQL server
-$username = "your_username"; // Replace with your MySQL username
-$password = "your_password"; // Replace with your MySQL password
-$dbname = "your_database"; // Replace with your MySQL database name
+$servername = "localhost"; // Change if your database is hosted elsewhere
+$username = "root"; // Default username for XAMPP
+$password = ""; // Default password for XAMPP (leave blank)
+$dbname = "tranquil_talk"; // Your database name
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
