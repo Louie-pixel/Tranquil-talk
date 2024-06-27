@@ -1,20 +1,22 @@
 body {
-  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Set minimum height to full viewport height */
   margin: 0;
-  padding: 0;
-  background-color: #f0f0f0; /* Light grey background for entire page */
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; /* Light grey background */
 }
 
 header {
-  background-color: #333; /* Dark grey header background */
-  color: #fff; /* White text color for header */
+  background-color: #333; /* Dark grey header */
+  color: white;
   padding: 10px;
 }
 
 header nav ul {
   list-style-type: none;
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 header nav ul li {
@@ -22,59 +24,17 @@ header nav ul li {
   margin-right: 10px;
 }
 
-header nav ul li a {
-  color: #fff; /* White text color for links */
-  text-decoration: none;
-  padding: 5px 10px;
-}
-
-header nav ul li a:hover {
-  background-color: #555; /* Darker grey on hover */
-}
-
 main {
+  flex: 1; /* Flexible space to push footer to bottom */
+  background-color: white; /* White background for main content */
   padding: 20px;
+  margin: 20px;
 }
 
 footer {
-  background-color: #333; /* Dark grey footer background */
-  color: #fff; /* White text color for footer */
+  background-color: #333; /* Dark grey footer */
+  color: white;
   text-align: center;
   padding: 10px;
-}
-
-.component-login {
-  background-color: #fff; /* White background for login component */
-}
-
-.component-register {
-  background-color: #fff; /* White background for register component */
-}
-
-.component-dashboard {
-  background-color: #fff; /* White background for dashboard component */
-}
-
-.component-chatroom {
-  background-color: #fff; /* White background for chatroom component */
-}
-
-.component-profile {
-  background-color: #fff; /* White background for profile component */
-}
-
-.component-expertprofile {
-  background-color: #fff; /* White background for expert profile component */
-}
-
-.component-userprofile {
-  background-color: #fff; /* White background for user profile component */
-}
-
-.small-img {
-  max-width: 100px; /* Adjust image size as needed */
-}
-
-.medium-img {
-  max-width: 300px; /* Adjust image size as needed */
+  margin-top: auto; /* Push footer to bottom */
 }
