@@ -169,7 +169,6 @@ function showComponent(componentName) {
         <button onclick="resetPassword()">Reset Password</button>`;
       break;
     case 'userLogin':
-      // Logic for user-specific login
       mainContent.innerHTML = `
         <h2>User Login</h2>
         <form onsubmit="handleUserLogin(event)">
@@ -187,7 +186,6 @@ function showComponent(componentName) {
         </form>`;
       break;
     case 'expertLogin':
-      // Logic for expert-specific login
       mainContent.innerHTML = `
         <h2>Expert Login</h2>
         <form onsubmit="handleExpertLogin(event)">
@@ -215,47 +213,56 @@ function showComponent(componentName) {
 
 function handleLogin(event) {
   event.preventDefault();
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+
+  // Perform login logic here
+  console.log('Logging in with:', username, password);
+
   isLoggedIn = true;
   showComponent('dashboard');
 }
 
 function handleRegister(event) {
   event.preventDefault();
+  const username = document.getElementById('register-username').value;
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
+
+  // Perform registration logic here
+  console.log('Registering with:', username, email, password);
+
   isLoggedIn = true;
   showComponent('dashboard');
 }
 
 function handleUserLogin(event) {
   event.preventDefault();
+  const username = document.getElementById('user-login-username').value;
+  const password = document.getElementById('user-login-password').value;
+
+  // Perform user login logic here
+  console.log('User logging in with:', username, password);
+
   isLoggedIn = true;
   showComponent('dashboard');
 }
 
 function handleExpertLogin(event) {
   event.preventDefault();
+  const username = document.getElementById('expert-login-username').value;
+  const password = document.getElementById('expert-login-password').value;
+
+  // Perform expert login logic here
+  console.log('Expert logging in with:', username, password);
+
   isLoggedIn = true;
   showComponent('dashboard');
 }
 
 function logout() {
   isLoggedIn = false;
-  showComponent('home');
-}
-
-function updateUserProfile() {
-  // Logic to update user profile
-}
-
-function updateExpertProfile() {
-  // Logic to update expert profile
-}
-
-function resetPassword() {
-  // Logic to reset password
-}
-
-function sendMessage() {
-  // Logic to send message in chat room
+  showComponent('login');
 }
 
 function updateNavigation() {
@@ -272,4 +279,4 @@ function updateNavigation() {
 }
 
 // Initial setup
-showComponent('home');
+showComponent('login'); // Show login page by default
