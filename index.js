@@ -239,44 +239,37 @@ function handleExpertLogin(event) {
 
 function logout() {
   isLoggedIn = false;
-  showComponent('login');
+  showComponent('home');
 }
 
 function updateUserProfile() {
-  // Update user profile logic
-  console.log('Updating user profile');
+  // Logic to update user profile
 }
 
 function updateExpertProfile() {
-  // Update expert profile logic
-  console.log('Updating expert profile');
+  // Logic to update expert profile
 }
 
 function resetPassword() {
-  // Reset password logic
-  console.log('Resetting password');
+  // Logic to reset password
+}
+
+function sendMessage() {
+  // Logic to send message in chat room
 }
 
 function updateNavigation() {
-  const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
-  const loggedInItems = document.querySelectorAll('header nav ul li:not(.login):not(.register)');
-  
+  const loginNav = document.querySelector('.login');
+  const registerNav = document.querySelector('.register');
+
   if (isLoggedIn) {
-    loginItems.forEach(item => {
-      item.style.display = 'none';
-    });
-    loggedInItems.forEach(item => {
-      item.style.display = 'inline';
-    });
+    loginNav.style.display = 'none';
+    registerNav.style.display = 'none';
   } else {
-    loginItems.forEach(item => {
-      item.style.display = 'inline';
-    });
-    loggedInItems.forEach(item => {
-      item.style.display = 'none';
-    });
+    loginNav.style.display = 'inline';
+    registerNav.style.display = 'inline';
   }
 }
 
-// Initially show login page
-showComponent('login');
+// Initial setup
+showComponent('home');
