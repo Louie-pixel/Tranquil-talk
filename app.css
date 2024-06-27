@@ -1,19 +1,15 @@
-/* Reset default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* General styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0; /* Grey background */
-  color: black; /* Black text */
+  margin: 0;
+  padding: 0;
+  background-color: black; /* Set background color to black */
+  color: black; /* Set text color to black */
 }
 
 header {
-  background-color: #4CAF50; /* Green header background */
-  color: white; /* White text */
+  background-color: #4CAF50;
+  color: white;
   padding: 15px 20px;
   text-align: center;
 }
@@ -43,15 +39,13 @@ header nav ul li a:hover {
 main {
   padding: 20px;
   min-height: 80vh; /* Ensures footer is at the bottom */
-  background-color: white; /* White content background */
-  color: black; /* Black text */
 }
 
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #4CAF50; /* Green footer background */
-  color: white; /* White text */
+  background-color: #4CAF50;
+  color: white;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -80,5 +74,56 @@ img {
 .component-home, .component-login, .component-register, .component-dashboard, .component-chatroom, .component-profile, .component-expertprofile, .component-userprofile {
   background-size: cover;
   padding: 20px;
-  color: black; /* Black text */
+  color: black; /* Set text color to black */
+}
+
+.component-home {
+  background-image: url('images/background-home.jpg');
+}
+
+.component-login {
+  background-image: url('images/background-login.jpg');
+}
+
+.component-register {
+  background-image: url('images/background-register.jpg');
+}
+
+.component-dashboard {
+  background-image: url('images/background-dashboard.jpg');
+}
+
+.component-chatroom {
+  background-image: url('images/background-chatroom.jpg');
+}
+
+.component-profile {
+  background-image: url('images/background-profile.jpg');
+}
+
+.component-expertprofile {
+  background-image: url('images/background-expertprofile.jpg');
+}
+
+.component-userprofile {
+  background-image: url('images/background-userprofile.jpg');
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-item {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  margin: 10px;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-item h3 {
+  margin-top: 0;
 }
