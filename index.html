@@ -3,27 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tranquil Talk App</title>
+  <title>Tranquil Talk</title>
   <link rel="stylesheet" href="app.css">
+  <script src="index.js" defer></script>
 </head>
 <body>
   <header>
     <nav>
-      <ul id="nav-list">
-        <li><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li><a href="#" onclick="showComponent('register')">Register</a></li>
+      <ul>
+        <li><a href="#" onclick="showComponent('home')">Home</a></li>
+        <li class="login"><a href="#" onclick="showComponent('login')">Login</a></li>
+        <li class="register"><a href="#" onclick="showComponent('register')">Register</a></li>
       </ul>
     </nav>
   </header>
-  <main id="main-content">
-    <!-- Initial component content will be loaded here -->
+  <main id="main-content" class="component-login">
+    <!-- Content loaded dynamically -->
   </main>
   <footer>
     <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
   </footer>
-  <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
-  <script src="index.js" type="text/babel"></script>
 </body>
 </html>
