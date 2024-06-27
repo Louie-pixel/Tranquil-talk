@@ -3,31 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tranquil Talk</title>
+  <title>Tranquil Talk App</title>
   <link rel="stylesheet" href="app.css">
 </head>
 <body>
   <header>
     <nav>
-      <ul>
-        <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
-        <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-        <li><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
-        <li><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
+      <ul id="nav-list">
+        <li><a href="#" onclick="showComponent('login')">Login</a></li>
+        <li><a href="#" onclick="showComponent('register')">Register</a></li>
       </ul>
     </nav>
   </header>
-
   <main id="main-content">
-    <h2>Welcome to Tranquil Talk</h2>
-    <p>This is the home page content.</p>
+    <!-- Initial component content will be loaded here -->
   </main>
-
   <footer>
     <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
   </footer>
-
-  <script src="app.js"></script>
+  <script src="https://unpkg.com/react/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone/babel.min.js"></script>
+  <script src="index.js" type="text/babel"></script>
 </body>
 </html>
