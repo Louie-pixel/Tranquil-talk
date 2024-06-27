@@ -4,6 +4,7 @@ function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
   mainContent.innerHTML = ''; // Clear previous content
 
+  // Load component based on componentName
   switch (componentName) {
     case 'home':
       mainContent.className = 'component-home';
@@ -62,38 +63,9 @@ function showComponent(componentName) {
     case 'dashboard':
       mainContent.className = 'component-dashboard';
       mainContent.innerHTML = `
-        <div class="dashboard-container">
-          <h2>Dashboard</h2>
-          <div class="dashboard-item">
-            <h3>Welcome, [Username]!</h3>
-            <p>Here's a summary of your recent activity.</p>
-          </div>
-          <div class="dashboard-item">
-            <h3>Quick Links</h3>
-            <ul>
-              <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
-              <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-              <li><a href="#">Settings</a></li>
-            </ul>
-          </div>
-          <div class="dashboard-item">
-            <h3>Notifications</h3>
-            <p>You have no new notifications.</p>
-          </div>
-          <div class="dashboard-item">
-            <h3>Recent Activity</h3>
-            <p>No recent activity to display.</p>
-          </div>
-          <div class="dashboard-item">
-            <h3>Resources</h3>
-            <p>Check out these <a href="#">helpful articles</a>.</p>
-          </div>
-          <div class="dashboard-item">
-            <h3>Appointments</h3>
-            <p>No upcoming appointments.</p>
-          </div>
-          <button onclick="logout()">Logout</button>
-        </div>`;
+        <h2>Dashboard</h2>
+        <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
+        <p>Welcome to your dashboard!</p>`;
       break;
     case 'chatroom':
       mainContent.className = 'component-chatroom';
@@ -162,36 +134,72 @@ function showComponent(componentName) {
         <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
     default:
+      mainContent.className = ''; // Reset class
       mainContent.innerHTML = `
         <h2>Component Not Found</h2>
         <p>The requested component does not exist.</p>`;
   }
 
-  updateNavigation();
+  // Change background and hide buttons if logged in
+  if (isLoggedIn) {
+    document.body.style.backgroundColor = '#d3d3d3'; // Grey background
+    document.querySelectorAll('header nav ul li.login, header nav ul li.register').forEach(button => {
+      button.style.display = 'none';
+    });
+  } else {
+    document.body.style.backgroundColor = '#f0f0f0'; // Default background
+    document.querySelectorAll('header nav ul li.login, header nav ul li.register').forEach(button => {
+      button.style.display = 'inline';
+    });
+  }
 }
 
 function handleLogin(event) {
   event.preventDefault();
+  const username = document.getElementById('login-username').value;
+  const password = document.getElementById('login-password').value;
+  console.log('Logging in with:', username, password);
+
+  // Simulate successful login (replace with actual login logic)
   isLoggedIn = true;
-  showComponent('dashboard');
+
+  // Show home page after login
+  showComponent('home');
 }
 
 function handleRegister(event) {
   event.preventDefault();
-  isLoggedIn = true;
-  showComponent('dashboard');
+  const username = document.getElementById('register-username').value;
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
+  console.log('Registering with:', username, email, password);
+  // Implement registration logic here
 }
 
-function logout() {
-  isLoggedIn = false;
-  showComponent('login');
+function sendMessage() {
+  const newMessage = document.getElementById('new-message').value;
+  const chatMessages = document.getElementById('chat-messages');
+  chatMessages.innerHTML += `<div>${newMessage}</div>`;
+  document.getElementById('new-message').value = '';
+  console.log('Sending message:', newMessage);
+  // Implement send message logic here
 }
 
-function updateNavigation() {
-  const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
-  loginItems.forEach(item => {
-    item.style.display = isLoggedIn ? 'none' : 'inline';
-  });
+function updateUserProfile() {
+  const preferences = document.getElementById('profile-preferences').value;
+  const mentalHealthNeeds = document.getElementById('profile-mental-health-needs').value;
+  console.log('Updating user profile with:', preferences, mentalHealthNeeds);
+  // Implement user profile update logic here
+}
+
+function updateExpertProfile() {
+  const field = document.getElementById('expert-field').value;
+  const experience = document.getElementById('expert-experience').value;
+  const clinics = document.getElementById('expert-clinics').value;
+  const email = document.getElementById('expert-email').value;
+  const number = document.getElementById('expert-number').value;
+  console.log('Updating expert profile with:', field, experience, clinics, email, number);
+  // Implement expert profile update logic here
 }
 
 // Initially show login page
