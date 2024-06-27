@@ -100,14 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-userprofile').addEventListener('click', () => showComponent('userprofile'));
 
   // Login form submission
-  document.addEventListener('submit', (event) => {
+  document.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (event.target.id === 'login-form') {
-      // Handle login logic here
-      console.log('Logged in');
-      // Hide login and register buttons after login
-      document.getElementById('nav-login').style.display = 'none';
-      document.getElementById('nav-register').style.display = 'none';
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      
+      try {
+        const response = await fetch('authentication.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `username=${username}&password=${password}`
+        });
+
+        const data = await response.text();
+        console.log(data); // Log the authentication response
+        showComponent('dashboard'); // Redirect to dashboard on successful login
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   });
 });
