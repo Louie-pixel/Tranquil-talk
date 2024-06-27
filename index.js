@@ -1,220 +1,198 @@
-function Login() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const handleLogin = () => {
-    // Implement login logic here
-    console.log('Logging in with:', username, password);
-    // Example: Perform authentication and set token in localStorage
-    localStorage.setItem('token', 'your_auth_token_here');
-    showComponent('dashboard'); // Redirect to dashboard after login
-  };
-
-  return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
-}
-
-function Register() {
-  const [username, setUsername] = React.useState('');
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-
-  const handleRegister = () => {
-    // Implement registration logic here
-    console.log('Registering with:', username, email, password);
-    // Example: Handle registration process
-    showComponent('login'); // Redirect to login after registration
-  };
-
-  return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleRegister}>
-        <label>
-          Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </label>
-        <br />
-        <button type="submit">Register</button>
-      </form>
-    </div>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Welcome to Tranquil Talk</h2>
-      <p>This is the home page content.</p>
-    </div>
-  );
-}
-
-function Dashboard() {
-  return (
-    <div>
-      <h2>Dashboard</h2>
-      <p>Welcome to your dashboard!</p>
-    </div>
-  );
-}
-
-function ChatRoom() {
-  const [messages, setMessages] = React.useState([]);
-  const [newMessage, setNewMessage] = React.useState('');
-
-  const sendMessage = () => {
-    // Implement send message logic
-    console.log('Sending message:', newMessage);
-    setMessages([...messages, newMessage]);
-    setNewMessage('');
-  };
-
-  return (
-    <div>
-      <h2>Chat Room</h2>
-      <div>
-        {messages.map((message, index) => (
-          <div key={index}>{message}</div>
-        ))}
-      </div>
-      <input type="text" value={newMessage} onChange={(e) => setNewMessage(e.target.value)} />
-      <button onClick={sendMessage}>Send</button>
-    </div>
-  );
-}
-
-function UserProfile() {
-  const [profile, setProfile] = React.useState({ preferences: [], mentalHealthNeeds: '' });
-
-  const handleUpdate = () => {
-    // Implement update profile logic
-    console.log('Updating profile:', profile);
-  };
-
-  return (
-    <div>
-      <h2>User Profile</h2>
-      <div>
-        <label>Preferences:</label>
-        <input type="text" value={profile.preferences.join(', ')} onChange={(e) => setProfile({ ...profile, preferences: e.target.value.split(', ') })} />
-      </div>
-      <div>
-        <label>Mental Health Needs:</label>
-        <textarea value={profile.mentalHealthNeeds} onChange={(e) => setProfile({ ...profile, mentalHealthNeeds: e.target.value })}></textarea>
-      </div>
-      <button onClick={handleUpdate}>Update Profile</button>
-    </div>
-  );
-}
-
-function ExpertProfile() {
-  const [expert, setExpert] = React.useState({ field: '', experience: 0, clinics: [], email: '', number: '' });
-
-  const handleUpdate = () => {
-    // Implement update expert profile logic
-    console.log('Updating expert profile:', expert);
-  };
-
-  return (
-    <div>
-      <h2>Expert Profile</h2>
-      <div>
-        <label>Field:</label>
-        <input type="text" value={expert.field} onChange={(e) => setExpert({ ...expert, field: e.target.value })} />
-      </div>
-      <div>
-        <label>Experience:</label>
-        <input type="number" value={expert.experience} onChange={(e) => setExpert({ ...expert, experience: e.target.value })} />
-      </div>
-      <div>
-        <label>Clinics:</label>
-        <input type="text" value={expert.clinics.join(', ')} onChange={(e) => setExpert({ ...expert, clinics: e.target.value.split(', ') })} />
-      </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" value={expert.email} onChange={(e) => setExpert({ ...expert, email: e.target.value })} />
-      </div>
-      <div>
-        <label>Number:</label>
-        <input type="tel" value={expert.number} onChange={(e) => setExpert({ ...expert, number: e.target.value })} />
-      </div>
-      <button onClick={handleUpdate}>Update Profile</button>
-    </div>
-  );
-}
+let isLoggedIn = false;
 
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  const navList = document.getElementById('nav-list');
+  mainContent.innerHTML = ''; // Clear previous content
 
-  // Clear previous content
-  mainContent.innerHTML = '';
-
-  // Load component based on componentName
   switch (componentName) {
+    case 'home':
+      mainContent.className = 'component-home';
+      mainContent.innerHTML = `
+        <h2>Welcome to Tranquil Talk</h2>
+        <img src="images/logo.png" alt="Logo" class="small-img" />
+        <p>This is the home page content.</p>`;
+      break;
     case 'login':
-      ReactDOM.render(<Login />, mainContent);
+      mainContent.className = 'component-login';
+      mainContent.innerHTML = `
+        <h2>Login</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <form onsubmit="handleLogin(event)">
+          <label>
+            Username:
+            <input type="text" id="login-username" />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" id="login-password" />
+          </label>
+          <br />
+          <button type="submit">Login</button>
+        </form>
+        <a href="#" onclick="showComponent('forgotPassword')">Forgot Password?</a>
+        <p>Login as: 
+          <button onclick="showComponent('userLogin')">User</button>
+          <button onclick="showComponent('expertLogin')">Expert</button>
+        </p>`;
       break;
     case 'register':
-      ReactDOM.render(<Register />, mainContent);
-      break;
-    case 'home':
-      ReactDOM.render(<Home />, mainContent);
+      mainContent.className = 'component-register';
+      mainContent.innerHTML = `
+        <h2>Register</h2>
+        <form onsubmit="handleRegister(event)">
+          <label>
+            Username:
+            <input type="text" id="register-username" />
+          </label>
+          <br />
+          <label>
+            Email:
+            <input type="email" id="register-email" />
+          </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" id="register-password" />
+          </label>
+          <br />
+          <button type="submit">Register</button>
+        </form>`;
       break;
     case 'dashboard':
-      ReactDOM.render(<Dashboard />, mainContent);
+      mainContent.className = 'component-dashboard';
+      mainContent.innerHTML = `
+        <div class="dashboard-container">
+          <h2>Dashboard</h2>
+          <div class="dashboard-item">
+            <h3>Welcome, [Username]!</h3>
+            <p>Here's a summary of your recent activity.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
+              <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
+              <li><a href="#">Settings</a></li>
+            </ul>
+          </div>
+          <div class="dashboard-item">
+            <h3>Notifications</h3>
+            <p>You have no new notifications.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Recent Activity</h3>
+            <p>No recent activity to display.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Resources</h3>
+            <p>Check out these <a href="#">helpful articles</a>.</p>
+          </div>
+          <div class="dashboard-item">
+            <h3>Appointments</h3>
+            <p>No upcoming appointments.</p>
+          </div>
+          <button onclick="logout()">Logout</button>
+        </div>`;
       break;
     case 'chatroom':
-      ReactDOM.render(<ChatRoom />, mainContent);
+      mainContent.className = 'component-chatroom';
+      mainContent.innerHTML = `
+        <h2>Chat Room</h2>
+        <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
+        <div id="chat-messages"></div>
+        <input type="text" id="new-message" />
+        <button onclick="sendMessage()">Send</button>`;
       break;
     case 'profile':
-      ReactDOM.render(<UserProfile />, mainContent);
+      mainContent.className = 'component-profile';
+      mainContent.innerHTML = `
+        <h2>User Profile</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <div>
+          <label>Preferences:</label>
+          <input type="text" id="profile-preferences" />
+        </div>
+        <div>
+          <label>Mental Health Needs:</label>
+          <textarea id="profile-mental-health-needs"></textarea>
+        </div>
+        <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
     case 'expertprofile':
-      ReactDOM.render(<ExpertProfile />, mainContent);
+      mainContent.className = 'component-expertprofile';
+      mainContent.innerHTML = `
+        <h2>Expert Profile</h2>
+        <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
+        <div>
+          <label>Field:</label>
+          <input type="text" id="expert-field" />
+        </div>
+        <div>
+          <label>Experience:</label>
+          <input type="number" id="expert-experience" />
+        </div>
+        <div>
+          <label>Clinics:</label>
+          <input type="text" id="expert-clinics" />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" id="expert-email" />
+        </div>
+        <div>
+          <label>Number:</label>
+          <input type="tel" id="expert-number" />
+        </div>
+        <button onclick="updateExpertProfile()">Update Profile</button>`;
       break;
     case 'userprofile':
-      ReactDOM.render(<UserProfile />, mainContent);
+      mainContent.className = 'component-userprofile';
+      mainContent.innerHTML = `
+        <h2>User Profile</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <div>
+          <label>Preferences:</label>
+          <input type="text" id="user-preferences" />
+        </div>
+        <div>
+          <label>Mental Health Needs:</label>
+          <textarea id="user-mental-health-needs"></textarea>
+        </div>
+        <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
     default:
-      mainContent.innerHTML = '<h2>Component Not Found</h2><p>The requested component does not exist.</p>';
+      mainContent.innerHTML = `
+        <h2>Component Not Found</h2>
+        <p>The requested component does not exist.</p>`;
   }
 
-  // Hide login and register links after successful login
-  if (componentName === 'home' || componentName === 'dashboard' || componentName === 'chatroom' ||
-      componentName === 'profile' || componentName === 'expertprofile' || componentName === 'userprofile') {
-    navList.style.display = 'none';
-  } else {
-    navList.style.display = 'block';
-  }
+  updateNavigation();
 }
 
-// Initial load
-showComponent('login'); // Display login page initially
+function handleLogin(event) {
+  event.preventDefault();
+  isLoggedIn = true;
+  showComponent('dashboard');
+}
+
+function handleRegister(event) {
+  event.preventDefault();
+  isLoggedIn = true;
+  showComponent('dashboard');
+}
+
+function logout() {
+  isLoggedIn = false;
+  showComponent('login');
+}
+
+function updateNavigation() {
+  const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
+  loginItems.forEach(item => {
+    item.style.display = isLoggedIn ? 'none' : 'inline';
+  });
+}
+
+// Initially show login page
+showComponent('login');
