@@ -5,28 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tranquil Talk</title>
   <link rel="stylesheet" href="app.css">
-  <script src="index.js" defer></script>
 </head>
 <body>
   <header>
     <nav>
       <ul>
-        <li><a href="#" onclick="showComponent('home')">Home</a></li>
-        <li class="login"><a href="#" onclick="showComponent('login')">Login</a></li>
-        <li class="register"><a href="#" onclick="showComponent('register')">Register</a></li>
-        <li><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
-        <li><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-        <li><a href="#" onclick="showComponent('profile')">Profile</a></li>
-        <li><a href="#" onclick="showComponent('expertprofile')">Expert Profile</a></li>
-        <li><a href="#" onclick="showComponent('userprofile')">User Profile</a></li>
+        <li><a href="#" id="home-link">Home</a></li>
+        <li><a href="#" id="dashboard-link">Dashboard</a></li>
+        <li><a href="#" id="chatroom-link">Chat Room</a></li>
+        <li><a href="#" id="profile-link">Profile</a></li>
+        <li><a href="#" id="login-link">Login</a></li>
+        <li><a href="#" id="register-link">Register</a></li>
       </ul>
     </nav>
   </header>
-  <main id="main-content" class="component-login">
-    <!-- Content loaded dynamically -->
+  
+  <main id="main-content">
+    <!-- Login and Register components will be inserted here -->
   </main>
+
   <footer>
     <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
   </footer>
+
+  <script src="index.js"></script>
 </body>
 </html>
