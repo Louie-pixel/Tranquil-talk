@@ -7,7 +7,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 header {
   background-color: #4CAF50;
   color: white;
@@ -48,15 +47,7 @@ footer {
   padding: 10px;
   background-color: #4CAF50;
   color: white;
-}
-
-/* Image classes */
-.small-img {
-  width: 100px; /* Adjust as needed */
-  height: 100px; /* Adjust as needed */
-}
-
-.medium-img {
-  width: 200px; /* Adjust as needed */
-  height: 200px; /* Adjust as needed */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
