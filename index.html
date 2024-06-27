@@ -5,64 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tranquil Talk</title>
   <link rel="stylesheet" href="app.css">
+  <script src="index.js" defer></script>
 </head>
 <body>
   <header>
     <nav>
-      <ul id="navbar">
+      <ul>
         <li><a href="#" id="nav-home">Home</a></li>
         <li><a href="#" id="nav-login">Login</a></li>
         <li><a href="#" id="nav-register">Register</a></li>
-        <li><a href="#" id="nav-dashboard" style="display:none;">Dashboard</a></li>
-        <li><a href="#" id="nav-chatroom" style="display:none;">Chat Room</a></li>
-        <li><a href="#" id="nav-profile" style="display:none;">Profile</a></li>
+        <li><a href="#" id="nav-dashboard">Dashboard</a></li>
+        <li><a href="#" id="nav-chatroom">Chat Room</a></li>
+        <li><a href="#" id="nav-profile">Profile</a></li>
+        <li><a href="#" id="nav-expertprofile">Expert Profile</a></li>
+        <li><a href="#" id="nav-userprofile">User Profile</a></li>
       </ul>
     </nav>
   </header>
-
-  <main id="main-content">
-    <div id="component-login" class="component-login">
-      <h2>Login</h2>
-      <form id="login-form">
-        <label>
-          Username:
-          <input type="text" id="login-username" required>
-        </label>
-        <br>
-        <label>
-          Password:
-          <input type="password" id="login-password" required>
-        </label>
-        <br>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-
-    <div id="component-register" class="component-register">
-      <h2>Register</h2>
-      <form id="register-form">
-        <label>
-          Username:
-          <input type="text" id="register-username" required>
-        </label>
-        <br>
-        <label>
-          Password:
-          <input type="password" id="register-password" required>
-        </label>
-        <br>
-        <button type="submit">Register</button>
-      </form>
-    </div>
-
-    <!-- Other components will be dynamically loaded here -->
-  </main>
-
+  <main id="main-content"></main>
   <footer>
     <p>&copy; 2024 Tranquil Talk. All rights reserved.</p>
   </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="index.js"></script>
 </body>
 </html>
