@@ -2,7 +2,10 @@ let isLoggedIn = false;
 
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
-  mainContent.innerHTML = ''; // Clear previous content
+  const navList = document.querySelector('header nav ul');
+
+  // Clear previous content
+  mainContent.innerHTML = '';
 
   // Load component based on componentName
   switch (componentName) {
@@ -10,14 +13,14 @@ function showComponent(componentName) {
       mainContent.className = 'component-home';
       mainContent.innerHTML = `
         <h2>Welcome to Tranquil Talk</h2>
-        <img src="images/logo.png" alt="Logo" class="small-img" />
+        <img src="images/home.jpg" alt="Home Image" class="page-image" />
         <p>This is the home page content.</p>`;
       break;
     case 'login':
       mainContent.className = 'component-login';
       mainContent.innerHTML = `
         <h2>Login</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <img src="images/login.jpg" alt="Login Image" class="page-image" />
         <form onsubmit="handleLogin(event)">
           <label>
             Username:
@@ -41,6 +44,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-register';
       mainContent.innerHTML = `
         <h2>Register</h2>
+        <img src="images/register.jpg" alt="Register Image" class="page-image" />
         <form onsubmit="handleRegister(event)">
           <label>
             Username:
@@ -64,14 +68,14 @@ function showComponent(componentName) {
       mainContent.className = 'component-dashboard';
       mainContent.innerHTML = `
         <h2>Dashboard</h2>
-        <img src="images/dashboard.png" alt="Dashboard" class="medium-img" />
+        <img src="images/dashboard.jpg" alt="Dashboard Image" class="page-image" />
         <p>Welcome to your dashboard!</p>`;
       break;
     case 'chatroom':
       mainContent.className = 'component-chatroom';
       mainContent.innerHTML = `
         <h2>Chat Room</h2>
-        <img src="images/chat-background.jpg" alt="Chat Background" class="medium-img" />
+        <img src="images/chatroom.jpg" alt="Chat Room Image" class="page-image" />
         <div id="chat-messages"></div>
         <input type="text" id="new-message" />
         <button onclick="sendMessage()">Send</button>`;
@@ -80,7 +84,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-profile';
       mainContent.innerHTML = `
         <h2>User Profile</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <img src="images/profile.jpg" alt="Profile Image" class="page-image" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="profile-preferences" />
@@ -95,7 +99,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-expertprofile';
       mainContent.innerHTML = `
         <h2>Expert Profile</h2>
-        <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
+        <img src="images/expertprofile.jpg" alt="Expert Profile Image" class="page-image" />
         <div>
           <label>Field:</label>
           <input type="text" id="expert-field" />
@@ -122,7 +126,7 @@ function showComponent(componentName) {
       mainContent.className = 'component-userprofile';
       mainContent.innerHTML = `
         <h2>User Profile</h2>
-        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <img src="images/userprofile.jpg" alt="User Profile Image" class="page-image" />
         <div>
           <label>Preferences:</label>
           <input type="text" id="user-preferences" />
@@ -140,18 +144,74 @@ function showComponent(componentName) {
         <p>The requested component does not exist.</p>`;
   }
 
-  // Change background and hide buttons if logged in
+  // Update navigation visibility based on login status
+  updateNavigationVisibility(componentName);
+}
+
+function updateNavigationVisibility(activeComponent) {
+  const navListItems = document.querySelectorAll('header nav ul li');
+
   if (isLoggedIn) {
-    document.body.style.backgroundColor = '#d3d3d3'; // Grey background
-    document.querySelectorAll('header nav ul li.login, header nav ul li.register').forEach(button => {
-      button.style.display = 'none';
+    // Show all navigation items except login and register
+    navListItems.forEach(item => {
+      if (item.classList.contains('login') || item.classList.contains('register')) {
+        item.style.display = 'none';
+      } else {
+        item.style.display = 'inline';
+      }
     });
+
+    // Display additional tabs based on active component
+    switch (activeComponent) {
+      case 'dashboard':
+        navListItems.forEach(item => {
+          if (item.classList.contains('dashboard')) {
+            item.style.display = 'none';
+          }
+        });
+        break;
+      case 'chatroom':
+        navListItems.forEach(item => {
+          if (item.classList.contains('chatroom')) {
+            item.style.display = 'none';
+          }
+        });
+        break;
+      case 'profile':
+        navListItems.forEach(item => {
+          if (item.classList.contains('profile')) {
+            item.style.display = 'none';
+          }
+        });
+        break;
+      case 'expertprofile':
+        navListItems.forEach(item => {
+          if (item.classList.contains('expertprofile')) {
+            item.style.display = 'none';
+          }
+        });
+        break;
+      case 'userprofile':
+        navListItems.forEach(item => {
+          if (item.classList.contains('userprofile')) {
+            item.style.display = 'none';
+          }
+        });
+        break;
+    }
   } else {
-    document.body.style.backgroundColor = '#f0f0f0'; // Default background
-    document.querySelectorAll('header nav ul li.login, header nav ul li.register').forEach(button => {
-      button.style.display = 'inline';
+    // Show only login and register
+    navListItems.forEach(item => {
+      if (item.classList.contains('login') || item.classList.contains('register')) {
+        item.style.display = 'inline';
+      } else {
+        item.style.display = 'none';
+      }
     });
   }
+
+  // Set background color based on login status
+  document.body.style.backgroundColor = isLoggedIn ? '#d3d3d3' : '#f0f0f0';
 }
 
 function handleLogin(event) {
