@@ -1,78 +1,42 @@
-/* Global styles */
+/* General styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0; /* Light grey background */
   margin: 0;
   padding: 0;
-}
-
-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
+  background-color: #f0f0f0;
 }
 
 header nav ul {
   list-style-type: none;
   padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
 }
 
 header nav ul li {
   display: inline;
-  margin: 0 10px;
-}
-
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-header nav ul li a:hover {
-  text-decoration: underline;
+  margin-right: 10px;
 }
 
 main {
-  flex: 1; /* Take remaining vertical space */
   padding: 20px;
-  color: black; /* Set text color to black */
-  background-color: #f0f0f0; /* Light grey background for main content */
+  background-color: #ffffff;
 }
 
 footer {
   text-align: center;
   padding: 10px;
-  background-color: #4CAF50;
-  color: white;
+  background-color: #f1f1f1;
   position: fixed;
   bottom: 0;
   width: 100%;
 }
 
-/* Styles for components */
-.component-login,
-.component-register,
-.component-dashboard,
-.component-chatroom,
-.component-profile,
-.component-expertprofile,
-.component-userprofile,
-.component-home {
-  background-color: white; /* Change background color to white for components */
-  padding: 20px;
-  margin: 10px;
-  border-radius: 5px;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 .small-img {
-  max-width: 100px; /* Adjust max-width for small images */
-  height: auto; /* Maintain aspect ratio */
-}
-
-.medium-img {
-  max-width: 300px; /* Adjust max-width for medium-sized images */
-  height: auto; /* Maintain aspect ratio */
+  max-width: 200px;
+  display: block;
+  margin: 10px auto;
 }
