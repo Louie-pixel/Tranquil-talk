@@ -6,13 +6,6 @@ body {
   background-color: #f0f0f0; /* Default background color */
 }
 
-header {
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px;
-  text-align: center;
-}
-
 header nav ul {
   list-style-type: none;
   padding: 0;
@@ -21,15 +14,6 @@ header nav ul {
 header nav ul li {
   display: inline;
   margin-right: 10px;
-}
-
-header nav ul li a {
-  color: white;
-  text-decoration: none;
-}
-
-header nav ul li a:hover {
-  text-decoration: underline;
 }
 
 main {
@@ -46,10 +30,6 @@ footer {
   width: 100%;
 }
 
-.hidden {
-  display: none;
-}
-
 /* Image resizing */
 img {
   max-width: 100%;
@@ -57,19 +37,17 @@ img {
 }
 
 .small-img {
-  max-width: 100px;
+  max-width: 100px; /* Adjust size as needed */
   height: auto;
 }
 
 .medium-img {
-  max-width: 200px;
+  max-width: 200px; /* Adjust size as needed */
   height: auto;
 }
 
-/* Component-specific styles */
-.component-login, .component-register, .component-dashboard, .component-chatroom, .component-profile {
-  text-align: center;
-  background-image: url('../images/background.jpg');
-  background-size: cover;
-  background-position: center;
+/* Hide login/register buttons when logged in */
+.logged-in header nav ul li.login,
+.logged-in header nav ul li.register {
+  display: none;
 }
