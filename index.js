@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+  let isLoggedIn = false;
+
   function showComponent(componentName) {
     const mainContent = document.getElementById('main-content');
     mainContent.innerHTML = ''; // Clear previous content
 
-    // Load component based on componentName
     switch (componentName) {
       case 'home':
         mainContent.innerHTML = `
@@ -84,10 +85,70 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>The requested component does not exist.</p>
           </div>`;
     }
+
+    updateNavigation();
+  }
+
+  function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('login-username').value;
+    const password = document.getElementById('login-password').value;
+
+    // Call to PHP backend for authentication
+    fetch('authentication.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'login', username, password })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          isLoggedIn = true;
+          showComponent('dashboard');
+        } else {
+          alert('Login failed: ' + data.message);
+        }
+      });
+  }
+
+  function handleRegister(event) {
+    event.preventDefault();
+    const username = document.getElementById('register-username').value;
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+
+    // Call to PHP backend for registration
+    fetch('authentication.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'register', username, email, password })
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          isLoggedIn = true;
+          showComponent('dashboard');
+        } else {
+          alert('Registration failed: ' + data.message);
+        }
+      });
+  }
+
+  function updateNavigation() {
+    const loginItems = document.querySelectorAll('header nav ul li#nav-login, header nav ul li#nav-register');
+    const protectedItems = document.querySelectorAll('header nav ul li#nav-dashboard, header nav ul li#nav-chatroom, header nav ul li#nav-profile');
+    
+    loginItems.forEach(item => {
+      item.style.display = isLoggedIn ? 'none' : 'inline';
+    });
+
+    protectedItems.forEach(item => {
+      item.style.display = isLoggedIn ? 'inline' : 'none';
+    });
   }
 
   // Initial load
-  showComponent('home');
+  showComponent('login');
 
   // Navigation event listeners
   document.getElementById('nav-home').addEventListener('click', () => showComponent('home'));
@@ -96,31 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-dashboard').addEventListener('click', () => showComponent('dashboard'));
   document.getElementById('nav-chatroom').addEventListener('click', () => showComponent('chatroom'));
   document.getElementById('nav-profile').addEventListener('click', () => showComponent('profile'));
-  document.getElementById('nav-expertprofile').addEventListener('click', () => showComponent('expertprofile'));
-  document.getElementById('nav-userprofile').addEventListener('click', () => showComponent('userprofile'));
 
-  // Login form submission
-  document.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  // Form submission listeners
+  document.addEventListener('submit', (event) => {
     if (event.target.id === 'login-form') {
-      const username = document.getElementById('login-username').value;
-      const password = document.getElementById('login-password').value;
-      
-      try {
-        const response = await fetch('authentication.php', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          body: `username=${username}&password=${password}`
-        });
-
-        const data = await response.text();
-        console.log(data); // Log the authentication response
-        showComponent('dashboard'); // Redirect to dashboard on successful login
-      } catch (error) {
-        console.error('Error:', error);
-      }
+      handleLogin(event);
+    } else if (event.target.id === 'register-form') {
+      handleRegister(event);
     }
   });
 });
