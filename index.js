@@ -1,58 +1,5 @@
 let isLoggedIn = false;
 
-async function handleLogin(event) {
-  event.preventDefault();
-  const username = document.getElementById('login-username').value;
-  const password = document.getElementById('login-password').value;
-
-  const response = await fetch('login.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ username, password })
-  });
-
-  const result = await response.text();
-  if (result.includes('Login successful!')) {
-    isLoggedIn = true;
-    showComponent('dashboard');
-  } else {
-    alert('Login failed: ' + result);
-  }
-}
-
-async function handleRegister(event) {
-  event.preventDefault();
-  const username = document.getElementById('register-username').value;
-  const email = document.getElementById('register-email').value;
-  const password = document.getElementById('register-password').value;
-
-  const response = await fetch('register.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({ username, email, password })
-  });
-
-  const result = await response.text();
-  if (result.includes('Registration successful!')) {
-    isLoggedIn = true;
-    showComponent('dashboard');
-  } else {
-    alert('Registration failed: ' + result);
-  }
-}
-
-function logout() {
-  isLoggedIn = false;
-  showComponent('login');
-}
-
-function updateNavigation() {
-  const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
-  loginItems.forEach(item => {
-    item.style.display = isLoggedIn ? 'none' : 'inline';
-  });
-}
-
 function showComponent(componentName) {
   const mainContent = document.getElementById('main-content');
   mainContent.innerHTML = ''; // Clear previous content
@@ -172,14 +119,80 @@ function showComponent(componentName) {
         </div>
         <button onclick="updateUserProfile()">Update Profile</button>`;
       break;
+    case 'expertprofile':
+      mainContent.className = 'component-expertprofile';
+      mainContent.innerHTML = `
+        <h2>Expert Profile</h2>
+        <img src="images/expert-avatar.png" alt="Expert Avatar" class="small-img" />
+        <div>
+          <label>Field:</label>
+          <input type="text" id="expert-field" />
+        </div>
+        <div>
+          <label>Experience:</label>
+          <input type="number" id="expert-experience" />
+        </div>
+        <div>
+          <label>Clinics:</label>
+          <input type="text" id="expert-clinics" />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" id="expert-email" />
+        </div>
+        <div>
+          <label>Number:</label>
+          <input type="tel" id="expert-number" />
+        </div>
+        <button onclick="updateExpertProfile()">Update Profile</button>`;
+      break;
+    case 'userprofile':
+      mainContent.className = 'component-userprofile';
+      mainContent.innerHTML = `
+        <h2>User Profile</h2>
+        <img src="images/user-avatar.png" alt="User Avatar" class="small-img" />
+        <div>
+          <label>Preferences:</label>
+          <input type="text" id="user-preferences" />
+        </div>
+        <div>
+          <label>Mental Health Needs:</label>
+          <textarea id="user-mental-health-needs"></textarea>
+        </div>
+        <button onclick="updateUserProfile()">Update Profile</button>`;
+      break;
     default:
       mainContent.innerHTML = `
-        <h2>Page Not Found</h2>
-        <p>The requested page could not be found.</p>`;
+        <h2>Component Not Found</h2>
+        <p>The requested component does not exist.</p>`;
   }
 
   updateNavigation();
 }
 
-// Initial load
-showComponent('home');
+function handleLogin(event) {
+  event.preventDefault();
+  isLoggedIn = true;
+  showComponent('dashboard');
+}
+
+function handleRegister(event) {
+  event.preventDefault();
+  isLoggedIn = true;
+  showComponent('dashboard');
+}
+
+function logout() {
+  isLoggedIn = false;
+  showComponent('login');
+}
+
+function updateNavigation() {
+  const loginItems = document.querySelectorAll('header nav ul li.login, header nav ul li.register');
+  loginItems.forEach(item => {
+    item.style.display = isLoggedIn ? 'none' : 'inline';
+  });
+}
+
+// Initially show login page
+showComponent('login');
