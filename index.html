@@ -4,23 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tranquil Talk</title>
-  <link rel="stylesheet" href="app.css">
-  <script src="index.js" defer></script>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/scripts.js" defer></script>
 </head>
 <body>
   <header>
     <nav>
-      <ul>
+      <ul id="nav-list">
         <li><a href="#" onclick="showComponent('home')">Home</a></li>
         <li id="nav-login"><a href="#" onclick="showComponent('login')">Login</a></li>
         <li id="nav-register"><a href="#" onclick="showComponent('register')">Register</a></li>
-        <li id="nav-dashboard" style="display: none;"><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
-        <li id="nav-chatroom" style="display: none;"><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
-        <li id="nav-profile" style="display: none;"><a href="#" onclick="showComponent('profile')">Profile</a></li>
+        <li id="nav-dashboard" class="hidden"><a href="#" onclick="showComponent('dashboard')">Dashboard</a></li>
+        <li id="nav-chatroom" class="hidden"><a href="#" onclick="showComponent('chatroom')">Chat Room</a></li>
+        <li id="nav-profile" class="hidden"><a href="#" onclick="showComponent('profile')">Profile</a></li>
+        <li id="nav-logout" class="hidden"><a href="#" onclick="logout()">Logout</a></li>
       </ul>
     </nav>
   </header>
-  <main id="main-content" class="component-login">
+  <main id="main-content">
     <!-- Content loaded dynamically -->
   </main>
   <footer>
