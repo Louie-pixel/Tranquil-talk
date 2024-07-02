@@ -9,11 +9,24 @@ body {
 header nav ul {
   list-style-type: none;
   padding: 0;
+  background-color: #333;
+  overflow: hidden;
 }
 
 header nav ul li {
   display: inline;
   margin-right: 10px;
+}
+
+header nav ul li a {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+header nav ul li a:hover {
+  background-color: #575757;
 }
 
 main {
@@ -37,17 +50,79 @@ img {
 }
 
 .small-img {
-  max-width: 100px; /* Adjust size as needed */
+  max-width: 100px;
   height: auto;
 }
 
 .medium-img {
-  max-width: 200px; /* Adjust size as needed */
+  max-width: 200px;
   height: auto;
 }
 
-/* Hide login/register buttons when logged in */
+/* Hide login/register buttons */
 .logged-in header nav ul li.login,
 .logged-in header nav ul li.register {
   display: none;
+}
+
+/* Background images for components */
+.component-home,
+.component-login,
+.component-register,
+.component-dashboard,
+.component-chatroom,
+.component-profile,
+.component-expertprofile,
+.component-userprofile {
+  background-size: cover;
+  padding: 20px;
+}
+
+/* Specific styles for different components */
+.component-login {
+  background-image: url('images/login-background.jpg');
+}
+
+.component-register {
+  background-image: url('images/register-background.jpg');
+}
+
+.component-dashboard {
+  background-image: url('images/dashboard-background.jpg');
+}
+
+.component-chatroom {
+  background-image: url('images/chatroom-background.jpg');
+}
+
+.component-profile {
+  background-image: url('images/profile-background.jpg');
+}
+
+.component-expertprofile {
+  background-image: url('images/expertprofile-background.jpg');
+}
+
+.component-userprofile {
+  background-image: url('images/userprofile-background.jpg');
+}
+
+/* Styles for dashboard items */
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.dashboard-item {
+  flex: 1;
+  min-width: 200px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-item h3 {
+  margin-top: 0;
 }
