@@ -168,4 +168,18 @@ function showComponent(componentName) {
         </div>
         <div>
           <label>Mental Health Needs:</label>
-          <textarea id="profile-mental-health-needs"></
+          <textarea id="profile-mental-health-needs"></textarea>
+        </div>
+        <button onclick="updateUserProfile()">Update Profile</button>`;
+      break;
+    default:
+      mainContent.innerHTML = `
+        <h2>Page Not Found</h2>
+        <p>The requested page could not be found.</p>`;
+  }
+
+  updateNavigation();
+}
+
+// Initial load
+showComponent('home');
