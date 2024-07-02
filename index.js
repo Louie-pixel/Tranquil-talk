@@ -3,12 +3,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContent = document.getElementById('main-content');
     mainContent.innerHTML = ''; // Clear previous content
 
+    // Load component based on componentName
     switch (componentName) {
       case 'home':
         mainContent.innerHTML = `
           <div class="component-home">
             <h2>Welcome to Tranquil Talk</h2>
-            <img src="images/home-image.jpg" class="small-img" alt="Home Image">
+            <img src="home-image.jpg" class="small-img" alt="Home Image">
             <p>This is the home page content.</p>
           </div>`;
         break;
@@ -16,9 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.innerHTML = `
           <div class="component-login">
             <h2>Login</h2>
-            <form id="login-form" action="php/authentication.php" method="POST">
-              <label>Username: <input type="text" name="username" required></label><br>
-              <label>Password: <input type="password" name="password" required></label><br>
+            <form id="login-form">
+              <label>Username: <input type="text" id="login-username"></label><br>
+              <label>Password: <input type="password" id="login-password"></label><br>
               <button type="submit">Login</button>
             </form>
             <button onclick="showComponent('register')">Register</button>
@@ -28,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.innerHTML = `
           <div class="component-register">
             <h2>Register</h2>
-            <form id="register-form" action="php/authentication.php" method="POST">
-              <label>Username: <input type="text" name="username" required></label><br>
-              <label>Email: <input type="email" name="email" required></label><br>
-              <label>Password: <input type="password" name="password" required></label><br>
+            <form id="register-form">
+              <label>Username: <input type="text" id="register-username"></label><br>
+              <label>Email: <input type="email" id="register-email"></label><br>
+              <label>Password: <input type="password" id="register-password"></label><br>
               <button type="submit">Register</button>
             </form>
           </div>`;
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.innerHTML = `
           <div class="component-dashboard">
             <h2>Dashboard</h2>
-            <img src="images/dashboard-image.jpg" class="small-img" alt="Dashboard Image">
+            <img src="dashboard-image.jpg" class="small-img" alt="Dashboard Image">
             <p>Dashboard content will be here.</p>
           </div>`;
         break;
@@ -48,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.innerHTML = `
           <div class="component-chatroom">
             <h2>Chat Room</h2>
-            <img src="images/chatroom-image.jpg" class="small-img" alt="Chatroom Image">
+            <img src="chatroom-image.jpg" class="small-img" alt="Chatroom Image">
             <p>Chat room interface will be here.</p>
           </div>`;
         break;
@@ -56,7 +57,23 @@ document.addEventListener('DOMContentLoaded', () => {
         mainContent.innerHTML = `
           <div class="component-profile">
             <h2>Profile</h2>
-            <img src="images/profile-image.jpg" class="small-img" alt="Profile Image">
+            <img src="profile-image.jpg" class="small-img" alt="Profile Image">
+            <p>User profile details will be here.</p>
+          </div>`;
+        break;
+      case 'expertprofile':
+        mainContent.innerHTML = `
+          <div class="component-expertprofile">
+            <h2>Expert Profile</h2>
+            <img src="expertprofile-image.jpg" class="small-img" alt="Expert Profile Image">
+            <p>Expert profile details will be here.</p>
+          </div>`;
+        break;
+      case 'userprofile':
+        mainContent.innerHTML = `
+          <div class="component-userprofile">
+            <h2>User Profile</h2>
+            <img src="userprofile-image.jpg" class="small-img" alt="User Profile Image">
             <p>User profile details will be here.</p>
           </div>`;
         break;
@@ -70,30 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initial load
-  showComponent('login');
-
-  // Check session for logged-in user
-  fetch('php/check_session.php')
-    .then(response => response.json())
-    .then(data => {
-      if (data.logged_in) {
-        showComponent('dashboard');
-        document.getElementById('nav-login').style.display = 'none';
-        document.getElementById('nav-register').style.display = 'none';
-        document.getElementById('nav-dashboard').classList.remove('hidden');
-        document.getElementById('nav-chatroom').classList.remove('hidden');
-        document.getElementById('nav-profile').classList.remove('hidden');
-        document.getElementById('nav-logout').classList.remove('hidden');
-      } else {
-        showComponent('login');
-        document.getElementById('nav-login').style.display = 'inline';
-        document.getElementById('nav-register').style.display = 'inline';
-        document.getElementById('nav-dashboard').classList.add('hidden');
-        document.getElementById('nav-chatroom').classList.add('hidden');
-        document.getElementById('nav-profile').classList.add('hidden');
-        document.getElementById('nav-logout').classList.add('hidden');
-      }
-    });
+  showComponent('home');
 
   // Navigation event listeners
   document.getElementById('nav-home').addEventListener('click', () => showComponent('home'));
@@ -106,49 +100,27 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('nav-userprofile').addEventListener('click', () => showComponent('userprofile'));
 
   // Login form submission
-  document.addEventListener('submit', (event) => {
+  document.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (event.target.id === 'login-form') {
-      const formData = new FormData(event.target);
-      fetch('php/authentication.php', {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          showComponent('dashboard');
-          document.getElementById('nav-login').style.display = 'none';
-          document.getElementById('nav-register').style.display = 'none';
-          document.getElementById('nav-dashboard').classList.remove('hidden');
-          document.getElementById('nav-chatroom').classList.remove('hidden');
-          document.getElementById('nav-profile').classList.remove('hidden');
-          document.getElementById('nav-logout').classList.remove('hidden');
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => console.error('Error:', error));
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      
+      try {
+        const response = await fetch('authentication.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: `username=${username}&password=${password}`
+        });
+
+        const data = await response.text();
+        console.log(data); // Log the authentication response
+        showComponent('dashboard'); // Redirect to dashboard on successful login
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   });
-
-  // Logout function
-  function logout() {
-    fetch('php/logout.php')
-      .then(response => response.json())
-      .then(data => {
-        if (data.logged_out) {
-          showComponent('login');
-          document.getElementById('nav-login').style.display = 'inline';
-          document.getElementById('nav-register').style.display = 'inline';
-          document.getElementById('nav-dashboard').classList.add('hidden');
-          document.getElementById('nav-chatroom').classList.add('hidden');
-          document.getElementById('nav-profile').classList.add('hidden');
-          document.getElementById('nav-logout').classList.add('hidden');
-        } else {
-          alert(data.message);
-        }
-      })
-      .catch(error => console.error('Error:', error));
-  }
 });
