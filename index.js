@@ -60,22 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>User profile details will be here.</p>
           </div>`;
         break;
-      case 'expertprofile':
-        mainContent.innerHTML = `
-          <div class="component-expertprofile">
-            <h2>Expert Profile</h2>
-            <img src="images/expertprofile-image.jpg" class="small-img" alt="Expert Profile Image">
-            <p>Expert profile details will be here.</p>
-          </div>`;
-        break;
-      case 'userprofile':
-        mainContent.innerHTML = `
-          <div class="component-userprofile">
-            <h2>User Profile</h2>
-            <img src="images/userprofile-image.jpg" class="small-img" alt="User Profile Image">
-            <p>User profile details will be here.</p>
-          </div>`;
-        break;
       default:
         mainContent.innerHTML = `
           <div>
@@ -86,7 +70,30 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Initial load
-  showComponent('home');
+  showComponent('login');
+
+  // Check session for logged-in user
+  fetch('php/check_session.php')
+    .then(response => response.json())
+    .then(data => {
+      if (data.logged_in) {
+        showComponent('dashboard');
+        document.getElementById('nav-login').style.display = 'none';
+        document.getElementById('nav-register').style.display = 'none';
+        document.getElementById('nav-dashboard').classList.remove('hidden');
+        document.getElementById('nav-chatroom').classList.remove('hidden');
+        document.getElementById('nav-profile').classList.remove('hidden');
+        document.getElementById('nav-logout').classList.remove('hidden');
+      } else {
+        showComponent('login');
+        document.getElementById('nav-login').style.display = 'inline';
+        document.getElementById('nav-register').style.display = 'inline';
+        document.getElementById('nav-dashboard').classList.add('hidden');
+        document.getElementById('nav-chatroom').classList.add('hidden');
+        document.getElementById('nav-profile').classList.add('hidden');
+        document.getElementById('nav-logout').classList.add('hidden');
+      }
+    });
 
   // Navigation event listeners
   document.getElementById('nav-home').addEventListener('click', () => showComponent('home'));
@@ -102,26 +109,46 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('submit', (event) => {
     event.preventDefault();
     if (event.target.id === 'login-form') {
-      // Handle login logic here
-      console.log('Logged in');
-      // Hide login and register buttons after login
-      document.getElementById('nav-login').style.display = 'none';
-      document.getElementById('nav-register').style.display = 'none';
-      document.getElementById('nav-dashboard').classList.remove('hidden');
-      document.getElementById('nav-chatroom').classList.remove('hidden');
-      document.getElementById('nav-profile').classList.remove('hidden');
-      document.getElementById('nav-logout').classList.remove('hidden');
+      const formData = new FormData(event.target);
+      fetch('php/authentication.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          showComponent('dashboard');
+          document.getElementById('nav-login').style.display = 'none';
+          document.getElementById('nav-register').style.display = 'none';
+          document.getElementById('nav-dashboard').classList.remove('hidden');
+          document.getElementById('nav-chatroom').classList.remove('hidden');
+          document.getElementById('nav-profile').classList.remove('hidden');
+          document.getElementById('nav-logout').classList.remove('hidden');
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => console.error('Error:', error));
     }
   });
-});
 
-function logout() {
-  console.log('Logged out');
-  document.getElementById('nav-login').style.display = 'inline';
-  document.getElementById('nav-register').style.display = 'inline';
-  document.getElementById('nav-dashboard').classList.add('hidden');
-  document.getElementById('nav-chatroom').classList.add('hidden');
-  document.getElementById('nav-profile').classList.add('hidden');
-  document.getElementById('nav-logout').classList.add('hidden');
-  showComponent('home');
-}
+  // Logout function
+  function logout() {
+    fetch('php/logout.php')
+      .then(response => response.json())
+      .then(data => {
+        if (data.logged_out) {
+          showComponent('login');
+          document.getElementById('nav-login').style.display = 'inline';
+          document.getElementById('nav-register').style.display = 'inline';
+          document.getElementById('nav-dashboard').classList.add('hidden');
+          document.getElementById('nav-chatroom').classList.add('hidden');
+          document.getElementById('nav-profile').classList.add('hidden');
+          document.getElementById('nav-logout').classList.add('hidden');
+        } else {
+          alert(data.message);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }
+});
