@@ -10,11 +10,13 @@ This web application aims to help people who have mental and psychological issue
 
 Project Inspiration
 The inspiration for this project stems from our own experiences of isolation and finding support through anonymous online communities. This project aims to provide a similar safe space for others, helping them connect and heal.
+![health-penguin](https://github.com/Louie-pixel/Tranquil-talk/assets/130101289/d02f595b-300a-4853-847b-f8b48d7c29b6)
 
 Technical Details
 Frontend: HTML5, CSS3, JavaScript
 Backend: Node.js, Express.js
 Database: MongoDB
+![coding](https://github.com/Louie-pixel/Tranquil-talk/assets/130101289/0fec108a-8648-4da8-9c75-1a7a76bad586)
 
 Architecture
 
@@ -23,6 +25,6 @@ One of the major challenges was implementing secure user authentication and data
 
 Future Plans
 We plan to further enhance the security features and expand the functionalities of the platform, including real-time chat and additional mental health resources.
-
+![for-the-future-planning](https://github.com/Louie-pixel/Tranquil-talk/assets/130101289/7ed762b9-943c-47ba-983c-25f52bba3d5b)
 
 
