@@ -25,6 +25,7 @@ One of the major challenges was implementing secure user authentication and data
 
 Future Plans
 We plan to further enhance the security features and expand the functionalities of the platform, including real-time chat and additional mental health resources.
+
 ![for-the-future-planning](https://github.com/Louie-pixel/Tranquil-talk/assets/130101289/7ed762b9-943c-47ba-983c-25f52bba3d5b)
 
 
