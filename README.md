@@ -1,3 +1,4 @@
+![WhatsApp Image 2024-07-09 at 17 15 02_cc6b2d91](https://github.com/Louie-pixel/Tranquil-talk/assets/130101289/b66afaa0-0878-4e19-a457-8e33e65ddc4a)
 TRANQUIL TALK Speak freely, Heal quietly
 https://tranquil-talk.vercel.app/
  Authors:
